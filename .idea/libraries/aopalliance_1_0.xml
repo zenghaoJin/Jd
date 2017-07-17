@@ -1,0 +1,67 @@
+<component name="libraryTable">
+  <library name="aopalliance-1.0">
+    <CLASSES>
+      <root url="jar://H:/jar包/ssm框架jar包/aopalliance-1.0.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/asm-3.3.1.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/aspectjweaver-1.6.11.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/cglib-2.2.2.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/commons-dbcp-1.2.2.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/commons-fileupload-1.2.2.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/commons-io-2.4.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/commons-logging-1.1.1.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/commons-pool-1.3.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/hibernate-validator-4.3.0.Final.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/jackson-core-asl-1.9.11.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/jackson-mapper-asl-1.9.11.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/javassist-3.17.1-GA.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/jboss-logging-3.1.0.CR2.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/jstl-1.2.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/junit-4.9.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/log4j-1.2.17.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/log4j-api-2.0-rc1.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/log4j-core-2.0-rc1.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/mybatis-3.2.7.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/mybatis-spring-1.2.2.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/mysql-connector-java-5.1.7-bin.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/slf4j-api-1.7.5.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/slf4j-log4j12-1.7.5.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/spring-aop-3.2.0.RELEASE.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/spring-aspects-3.2.0.RELEASE.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/spring-beans-3.2.0.RELEASE.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/spring-context-3.2.0.RELEASE.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/spring-context-support-3.2.0.RELEASE.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/spring-core-3.2.0.RELEASE.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/spring-expression-3.2.0.RELEASE.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/spring-jdbc-3.2.0.RELEASE.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/spring-orm-3.2.0.RELEASE.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/spring-test-3.2.0.RELEASE.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/spring-tx-3.2.0.RELEASE.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/spring-web-3.2.0.RELEASE.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/spring-webmvc-3.2.0.RELEASE.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/validation-api-1.0.0.GA.jar!/" />
+      <root url="jar://H:/jar包/标签jar包/jstl.jar!/" />
+      <root url="jar://H:/jar包/标签jar包/standard.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/commons-codec-1.9.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/commons-logging-1.2.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/dsn.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/fluent-hc-4.4.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/httpclient-4.4.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/httpclient-cache-4.4.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/httpclient-win-4.4.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/httpcore-4.4.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/httpmime-4.4.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/imap.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/jna-4.1.0.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/jna-platform-4.1.0.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/mailapi.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/pop3.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/smtp.jar!/" />
+      <root url="jar://H:/jar包/短信验证和手机验证jar包/yunpian-java-sdk.jar!/" />
+      <root url="jar://H:/jar包/校验器jar包/hibernate-validator-4.3.0.Final.jar!/" />
+      <root url="jar://H:/jar包/校验器jar包/jboss-logging-3.1.0.CR2.jar!/" />
+      <root url="jar://H:/jar包/校验器jar包/validation-api-1.0.0.GA.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
