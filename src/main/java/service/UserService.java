@@ -13,4 +13,6 @@ public interface UserService {
     public void emailCheck(String name) throws Exception;
     public JdUser select_Name(String name) throws Exception;
     public int checkEmail(String email) throws Exception;
+    public JdUser select_Email(String email) throws Exception;
+    public void updateUser_name(JdUser user) throws Exception;
 }

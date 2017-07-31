@@ -33,6 +33,12 @@ public class UserServiceImpl implements UserService{
     }
     public int checkEmail(String email) throws Exception{
         return jdUserMapper.checkEmail(email);
+    }
+    public JdUser select_Email(String email) throws Exception {
+        return jdUserMapper.select_Email(email);
+    }
+    public void updateUser_name(JdUser user) throws Exception {
+        jdUserMapper.updateUser(user);
     };
 
 

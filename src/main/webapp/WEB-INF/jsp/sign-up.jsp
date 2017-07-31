@@ -78,7 +78,7 @@
             }
             if(str2.test(val2)){
                 var url = "${pageContext.request.contextPath}/checkUname";
-                var args = {"name":val1,"time":new Date()};
+                var args = {"email":val2,"time":new Date()};
                 $.getJSON(url,args,function (date) {
                     if(date.message=="0"){
                         $("#emailInfo").show();

@@ -39,4 +39,5 @@
 		<property name="basePackage" value="mapper"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
+
 </beans>

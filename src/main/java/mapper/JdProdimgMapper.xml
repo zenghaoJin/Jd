@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.JdProdimgMapper" >
+  <resultMap id="BaseResultMap" type="po.JdProdimg" >
+    <id column="pimg_id" property="pimgId" jdbcType="INTEGER" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="iname" property="iname" jdbcType="VARCHAR" />
+    <result column="pro_id" property="proId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pimg_id, img, iname, pro_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="po.JdProdimgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jd_prodimg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from jd_prodimg
+    where pimg_id = #{pimgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from jd_prodimg
+    where pimg_id = #{pimgId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="po.JdProdimgExample" >
+    delete from jd_prodimg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.JdProdimg" useGeneratedKeys="true" keyProperty="pimgId">
+    insert into jd_prodimg (pimg_id, img, iname, 
+      pro_id)
+    values (#{pimgId,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, #{iname,jdbcType=VARCHAR}, 
+      #{proId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="po.JdProdimg" >
+    insert into jd_prodimg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pimgId != null" >
+        pimg_id,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="iname != null" >
+        iname,
+      </if>
+      <if test="proId != null" >
+        pro_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pimgId != null" >
+        #{pimgId,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="iname != null" >
+        #{iname,jdbcType=VARCHAR},
+      </if>
+      <if test="proId != null" >
+        #{proId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.JdProdimgExample" resultType="java.lang.Integer" >
+    select count(*) from jd_prodimg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update jd_prodimg
+    <set >
+      <if test="record.pimgId != null" >
+        pimg_id = #{record.pimgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.img != null" >
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iname != null" >
+        iname = #{record.iname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proId != null" >
+        pro_id = #{record.proId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update jd_prodimg
+    set pimg_id = #{record.pimgId,jdbcType=INTEGER},
+      img = #{record.img,jdbcType=VARCHAR},
+      iname = #{record.iname,jdbcType=VARCHAR},
+      pro_id = #{record.proId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="po.JdProdimg" >
+    update jd_prodimg
+    <set >
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="iname != null" >
+        iname = #{iname,jdbcType=VARCHAR},
+      </if>
+      <if test="proId != null" >
+        pro_id = #{proId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pimg_id = #{pimgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="po.JdProdimg" >
+    update jd_prodimg
+    set img = #{img,jdbcType=VARCHAR},
+      iname = #{iname,jdbcType=VARCHAR},
+      pro_id = #{proId,jdbcType=INTEGER}
+    where pimg_id = #{pimgId,jdbcType=INTEGER}
+  </update>
+</mapper>

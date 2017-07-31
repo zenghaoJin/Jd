@@ -37,4 +37,8 @@ public interface JdUserMapper {
     JdUser select_Name(String name);
 
     int checkEmail(String email);
+
+    JdUser select_Email(String email);
+
+    void updateUser(JdUser jdUser);
 }

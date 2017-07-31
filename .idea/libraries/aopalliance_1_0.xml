@@ -6,9 +6,6 @@
       <root url="jar://H:/jar包/ssm框架jar包/aspectjweaver-1.6.11.jar!/" />
       <root url="jar://H:/jar包/ssm框架jar包/cglib-2.2.2.jar!/" />
       <root url="jar://H:/jar包/ssm框架jar包/commons-dbcp-1.2.2.jar!/" />
-      <root url="jar://H:/jar包/ssm框架jar包/commons-fileupload-1.2.2.jar!/" />
-      <root url="jar://H:/jar包/ssm框架jar包/commons-io-2.4.jar!/" />
-      <root url="jar://H:/jar包/ssm框架jar包/commons-logging-1.1.1.jar!/" />
       <root url="jar://H:/jar包/ssm框架jar包/commons-pool-1.3.jar!/" />
       <root url="jar://H:/jar包/ssm框架jar包/hibernate-validator-4.3.0.Final.jar!/" />
       <root url="jar://H:/jar包/ssm框架jar包/jackson-core-asl-1.9.11.jar!/" />
@@ -60,6 +57,9 @@
       <root url="jar://H:/jar包/校验器jar包/hibernate-validator-4.3.0.Final.jar!/" />
       <root url="jar://H:/jar包/校验器jar包/jboss-logging-3.1.0.CR2.jar!/" />
       <root url="jar://H:/jar包/校验器jar包/validation-api-1.0.0.GA.jar!/" />
+      <root url="jar://H:/jar包/文件上传jar包/commons-fileupload-1.2.2.jar!/" />
+      <root url="jar://H:/jar包/文件上传jar包/commons-io-2.4.jar!/" />
+      <root url="jar://H:/jar包/ssm框架jar包/commons-logging-1.1.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

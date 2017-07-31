@@ -67,7 +67,7 @@
                 </c:if>
                 <div class="form-group">
                     <label for="username" class="sr-only">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="账号" autocomplete="off" value="${username}">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="账号名/邮箱地址" autocomplete="off" value="${username}">
                 </div>
                 <div class="form-group">
                     <label for="pass" class="sr-only">Pass</label>

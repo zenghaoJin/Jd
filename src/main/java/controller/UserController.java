@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import po.JdUser;
 import service.UserService;
 import tool.EmailCheck;
+import tool.Forget;
 import tool.actiCode;
 
 import javax.servlet.http.HttpServletResponse;
@@ -118,5 +119,38 @@ public class UserController {
         }
         return "login";
     }
-
+    @RequestMapping("/forgetPass")
+    public void forget(HttpServletResponse response,String email)throws Exception{
+        Forget forget = new Forget();
+        String result = null;
+        JdUser jdUser = userService.select_Email(email);
+        if(jdUser!=null){
+        forget.forgetPass(email,jdUser.getName());
+        result = "{\"message\":\"1\"}";
+        }else{
+        result = "{\"message\":\"0\"}";
+        }
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().print(result);
+    }
+    @RequestMapping("/forgetPass2")
+    public String forget2(String name,Model model)throws Exception{
+        model.addAttribute("name",name);
+        return "forget2";
+    }
+    @RequestMapping("/forgetPassUI")
+    public String forgetUI(@Validated JdUser jdUser,BindingResult bindingResult, Model model)throws Exception{
+        if(bindingResult.hasErrors()){
+            List<ObjectError> allErrors = bindingResult.getAllErrors();
+            for(ObjectError objectError:allErrors){
+                System.out.println(objectError.getDefaultMessage());
+            }
+            model.addAttribute("message",allErrors);
+            model.addAttribute("name",jdUser.getName());
+            return "forward:forgetPass2";
+        }else{
+            userService.updateUser_name(jdUser);
+        return "login";
+        }
+    }
 }

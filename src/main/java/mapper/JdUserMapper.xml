@@ -256,7 +256,7 @@
     where u_id = #{uId,jdbcType=INTEGER}
   </update>
   <select id="findUser" parameterType="po.JdUser" resultType="int">
-  SELECT count(*) FROM jd_user WHERE pass=#{pass} AND (name=#{name} OR email=#{name} OR phone_number=#{name})
+  SELECT count(*) FROM jd_user WHERE pass=#{pass} AND (name=#{name} OR email=#{name})
   </select>
   <select id="findUserName" parameterType="java.lang.String" resultType="int">
     SELECT count(*) FROM jd_user WHERE name=#{name}
@@ -267,7 +267,34 @@
   <select id="select_Name" parameterType="java.lang.String" resultType="po.JdUser">
     SELECT * FROM jd_user WHERE name=#{name}
   </select>
+  <select id="select_Email" parameterType="java.lang.String" resultType="po.JdUser">
+    SELECT * FROM jd_user WHERE email=#{email}
+  </select>
   <select id="checkEmail" parameterType="java.lang.String" resultType="int">
     SELECT count(*) FROM jd_user WHERE email=#{email}
   </select>
+  <update id="updateUser" parameterType="po.JdUser" >
+    update jd_user
+    <set >
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="pass != null" >
+        pass = #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
+      </if>
+      <if test="acticode != null" >
+        actiCode = #{acticode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where name = #{name,jdbcType=INTEGER}
+  </update>
 </mapper>
