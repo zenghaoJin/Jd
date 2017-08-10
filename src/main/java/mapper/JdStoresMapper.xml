@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mapper.JdStoresMapper" >
   <resultMap id="BaseResultMap" type="po.JdStores" >
-    <id column="sto_id" property="sto_Id" jdbcType="INTEGER" />
+    <id column="stoid" property="stoid" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="pass" property="pass" jdbcType="VARCHAR" />
     <result column="pname" property="pname" jdbcType="VARCHAR" />
@@ -66,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    sto_id, name, pass, pname
+    stoid, name, pass, pname
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="po.JdStoresExample" >
     select
@@ -86,11 +86,11 @@
     select 
     <include refid="Base_Column_List" />
     from jd_stores
-    where sto_id = #{sto_Id,jdbcType=INTEGER}
+    where stoid = #{stoid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from jd_stores
-    where sto_id = #{sto_Id,jdbcType=INTEGER}
+    where stoid = #{stoid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="po.JdStoresExample" >
     delete from jd_stores
@@ -99,16 +99,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="po.JdStores" >
-    insert into jd_stores (sto_id, name, pass, 
+    insert into jd_stores (stoid, name, pass, 
       pname)
-    values (#{sto_Id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR},
+    values (#{stoid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR}, 
       #{pname,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="po.JdStores" >
     insert into jd_stores
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="sto_Id != null" >
-        sto_id,
+      <if test="stoid != null" >
+        stoid,
       </if>
       <if test="name != null" >
         name,
@@ -121,8 +121,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="sto_Id != null" >
-        #{sto_Id,jdbcType=INTEGER},
+      <if test="stoid != null" >
+        #{stoid,jdbcType=INTEGER},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -144,8 +144,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update jd_stores
     <set >
-      <if test="record.sto_Id != null" >
-        sto_id = #{record.sto_Id,jdbcType=INTEGER},
+      <if test="record.stoid != null" >
+        stoid = #{record.stoid,jdbcType=INTEGER},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -163,7 +163,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update jd_stores
-    set sto_id = #{record.sto_Id,jdbcType=INTEGER},
+    set stoid = #{record.stoid,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       pass = #{record.pass,jdbcType=VARCHAR},
       pname = #{record.pname,jdbcType=VARCHAR}
@@ -184,19 +184,38 @@
         pname = #{pname,jdbcType=VARCHAR},
       </if>
     </set>
-    where sto_id = #{sto_Id,jdbcType=INTEGER}
+    where stoid = #{stoid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="po.JdStores" >
     update jd_stores
     set name = #{name,jdbcType=VARCHAR},
       pass = #{pass,jdbcType=VARCHAR},
       pname = #{pname,jdbcType=VARCHAR}
-    where sto_id = #{sto_Id,jdbcType=INTEGER}
+    where stoid = #{stoid,jdbcType=INTEGER}
   </update>
   <select id="findStores" parameterType="po.JdStores" resultType="int">
     SELECT count(*) FROM jd_stores WHERE pass=#{pass} AND pname=#{pname}
   </select>
   <select id="selectStores"  resultType="po.JdStores">
     SELECT * FROM jd_stores WHERE pname=#{pname}
+  </select>
+
+  <select id="selectJdprods" resultType="po.JdProds" >
+    SELECT * FROM jd_prods WHERE stoid=#{stoid}
+  </select>
+  <select id="selectJdprodImg" resultType="po.JdProdimg" >
+    SELECT * FROM jd_prodimg WHERE proid=#{proid}
+  </select>
+  <select id="selectZoomimg" resultType="po.JdZoomimg" >
+    SELECT * FROM jd_zoomimg WHERE pimgid=#{pimgid}
+  </select>
+  <select id="selectSizes" resultType="po.JdSizes" >
+    SELECT * FROM jd_sizes WHERE pimgid=#{pimgid}
+  </select>
+  <select id="selectOjdprods" resultType="po.JdProds" >
+    SELECT * FROM jd_prods WHERE proid=#{proid}
+  </select>
+  <select id="selectSjdprods" resultType="po.JdProds" >
+    SELECT * FROM jd_prods
   </select>
 </mapper>

@@ -104,63 +104,63 @@ public class JdAdminExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andAIdIsNull() {
-            addCriterion("a_id is null");
+        public Criteria andAidIsNull() {
+            addCriterion("aid is null");
             return (Criteria) this;
         }
 
-        public Criteria andAIdIsNotNull() {
-            addCriterion("a_id is not null");
+        public Criteria andAidIsNotNull() {
+            addCriterion("aid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAIdEqualTo(Integer value) {
-            addCriterion("a_id =", value, "aId");
+        public Criteria andAidEqualTo(Integer value) {
+            addCriterion("aid =", value, "aid");
             return (Criteria) this;
         }
 
-        public Criteria andAIdNotEqualTo(Integer value) {
-            addCriterion("a_id <>", value, "aId");
+        public Criteria andAidNotEqualTo(Integer value) {
+            addCriterion("aid <>", value, "aid");
             return (Criteria) this;
         }
 
-        public Criteria andAIdGreaterThan(Integer value) {
-            addCriterion("a_id >", value, "aId");
+        public Criteria andAidGreaterThan(Integer value) {
+            addCriterion("aid >", value, "aid");
             return (Criteria) this;
         }
 
-        public Criteria andAIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("a_id >=", value, "aId");
+        public Criteria andAidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("aid >=", value, "aid");
             return (Criteria) this;
         }
 
-        public Criteria andAIdLessThan(Integer value) {
-            addCriterion("a_id <", value, "aId");
+        public Criteria andAidLessThan(Integer value) {
+            addCriterion("aid <", value, "aid");
             return (Criteria) this;
         }
 
-        public Criteria andAIdLessThanOrEqualTo(Integer value) {
-            addCriterion("a_id <=", value, "aId");
+        public Criteria andAidLessThanOrEqualTo(Integer value) {
+            addCriterion("aid <=", value, "aid");
             return (Criteria) this;
         }
 
-        public Criteria andAIdIn(List<Integer> values) {
-            addCriterion("a_id in", values, "aId");
+        public Criteria andAidIn(List<Integer> values) {
+            addCriterion("aid in", values, "aid");
             return (Criteria) this;
         }
 
-        public Criteria andAIdNotIn(List<Integer> values) {
-            addCriterion("a_id not in", values, "aId");
+        public Criteria andAidNotIn(List<Integer> values) {
+            addCriterion("aid not in", values, "aid");
             return (Criteria) this;
         }
 
-        public Criteria andAIdBetween(Integer value1, Integer value2) {
-            addCriterion("a_id between", value1, value2, "aId");
+        public Criteria andAidBetween(Integer value1, Integer value2) {
+            addCriterion("aid between", value1, value2, "aid");
             return (Criteria) this;
         }
 
-        public Criteria andAIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("a_id not between", value1, value2, "aId");
+        public Criteria andAidNotBetween(Integer value1, Integer value2) {
+            addCriterion("aid not between", value1, value2, "aid");
             return (Criteria) this;
         }
 

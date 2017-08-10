@@ -10,7 +10,7 @@ public interface JdSizesMapper {
 
     int deleteByExample(JdSizesExample example);
 
-    int deleteByPrimaryKey(Integer sizeId);
+    int deleteByPrimaryKey(Integer sizeid);
 
     int insert(JdSizes record);
 
@@ -18,7 +18,7 @@ public interface JdSizesMapper {
 
     List<JdSizes> selectByExample(JdSizesExample example);
 
-    JdSizes selectByPrimaryKey(Integer sizeId);
+    JdSizes selectByPrimaryKey(Integer sizeid);
 
     int updateByExampleSelective(@Param("record") JdSizes record, @Param("example") JdSizesExample example);
 

@@ -104,63 +104,63 @@ public class JdProdimgExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andPimgIdIsNull() {
-            addCriterion("pimg_id is null");
+        public Criteria andPimgidIsNull() {
+            addCriterion("pimgid is null");
             return (Criteria) this;
         }
 
-        public Criteria andPimgIdIsNotNull() {
-            addCriterion("pimg_id is not null");
+        public Criteria andPimgidIsNotNull() {
+            addCriterion("pimgid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPimgIdEqualTo(Integer value) {
-            addCriterion("pimg_id =", value, "pimgId");
+        public Criteria andPimgidEqualTo(Integer value) {
+            addCriterion("pimgid =", value, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andPimgIdNotEqualTo(Integer value) {
-            addCriterion("pimg_id <>", value, "pimgId");
+        public Criteria andPimgidNotEqualTo(Integer value) {
+            addCriterion("pimgid <>", value, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andPimgIdGreaterThan(Integer value) {
-            addCriterion("pimg_id >", value, "pimgId");
+        public Criteria andPimgidGreaterThan(Integer value) {
+            addCriterion("pimgid >", value, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andPimgIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("pimg_id >=", value, "pimgId");
+        public Criteria andPimgidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("pimgid >=", value, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andPimgIdLessThan(Integer value) {
-            addCriterion("pimg_id <", value, "pimgId");
+        public Criteria andPimgidLessThan(Integer value) {
+            addCriterion("pimgid <", value, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andPimgIdLessThanOrEqualTo(Integer value) {
-            addCriterion("pimg_id <=", value, "pimgId");
+        public Criteria andPimgidLessThanOrEqualTo(Integer value) {
+            addCriterion("pimgid <=", value, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andPimgIdIn(List<Integer> values) {
-            addCriterion("pimg_id in", values, "pimgId");
+        public Criteria andPimgidIn(List<Integer> values) {
+            addCriterion("pimgid in", values, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andPimgIdNotIn(List<Integer> values) {
-            addCriterion("pimg_id not in", values, "pimgId");
+        public Criteria andPimgidNotIn(List<Integer> values) {
+            addCriterion("pimgid not in", values, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andPimgIdBetween(Integer value1, Integer value2) {
-            addCriterion("pimg_id between", value1, value2, "pimgId");
+        public Criteria andPimgidBetween(Integer value1, Integer value2) {
+            addCriterion("pimgid between", value1, value2, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andPimgIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("pimg_id not between", value1, value2, "pimgId");
+        public Criteria andPimgidNotBetween(Integer value1, Integer value2) {
+            addCriterion("pimgid not between", value1, value2, "pimgid");
             return (Criteria) this;
         }
 
@@ -304,63 +304,63 @@ public class JdProdimgExample {
             return (Criteria) this;
         }
 
-        public Criteria andProIdIsNull() {
-            addCriterion("pro_id is null");
+        public Criteria andProidIsNull() {
+            addCriterion("proid is null");
             return (Criteria) this;
         }
 
-        public Criteria andProIdIsNotNull() {
-            addCriterion("pro_id is not null");
+        public Criteria andProidIsNotNull() {
+            addCriterion("proid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andProIdEqualTo(Integer value) {
-            addCriterion("pro_id =", value, "proId");
+        public Criteria andProidEqualTo(Integer value) {
+            addCriterion("proid =", value, "proid");
             return (Criteria) this;
         }
 
-        public Criteria andProIdNotEqualTo(Integer value) {
-            addCriterion("pro_id <>", value, "proId");
+        public Criteria andProidNotEqualTo(Integer value) {
+            addCriterion("proid <>", value, "proid");
             return (Criteria) this;
         }
 
-        public Criteria andProIdGreaterThan(Integer value) {
-            addCriterion("pro_id >", value, "proId");
+        public Criteria andProidGreaterThan(Integer value) {
+            addCriterion("proid >", value, "proid");
             return (Criteria) this;
         }
 
-        public Criteria andProIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("pro_id >=", value, "proId");
+        public Criteria andProidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("proid >=", value, "proid");
             return (Criteria) this;
         }
 
-        public Criteria andProIdLessThan(Integer value) {
-            addCriterion("pro_id <", value, "proId");
+        public Criteria andProidLessThan(Integer value) {
+            addCriterion("proid <", value, "proid");
             return (Criteria) this;
         }
 
-        public Criteria andProIdLessThanOrEqualTo(Integer value) {
-            addCriterion("pro_id <=", value, "proId");
+        public Criteria andProidLessThanOrEqualTo(Integer value) {
+            addCriterion("proid <=", value, "proid");
             return (Criteria) this;
         }
 
-        public Criteria andProIdIn(List<Integer> values) {
-            addCriterion("pro_id in", values, "proId");
+        public Criteria andProidIn(List<Integer> values) {
+            addCriterion("proid in", values, "proid");
             return (Criteria) this;
         }
 
-        public Criteria andProIdNotIn(List<Integer> values) {
-            addCriterion("pro_id not in", values, "proId");
+        public Criteria andProidNotIn(List<Integer> values) {
+            addCriterion("proid not in", values, "proid");
             return (Criteria) this;
         }
 
-        public Criteria andProIdBetween(Integer value1, Integer value2) {
-            addCriterion("pro_id between", value1, value2, "proId");
+        public Criteria andProidBetween(Integer value1, Integer value2) {
+            addCriterion("proid between", value1, value2, "proid");
             return (Criteria) this;
         }
 
-        public Criteria andProIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("pro_id not between", value1, value2, "proId");
+        public Criteria andProidNotBetween(Integer value1, Integer value2) {
+            addCriterion("proid not between", value1, value2, "proid");
             return (Criteria) this;
         }
     }

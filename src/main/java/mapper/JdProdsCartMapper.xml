@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.JdProdsCartMapper" >
+  <resultMap id="BaseResultMap" type="po.JdProdsCartKey" >
+    <id column="Cid" property="cid" jdbcType="INTEGER" />
+    <id column="proid" property="proid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Cid, proid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="po.JdProdsCartExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jd_prods_cart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="po.JdProdsCartKey" >
+    delete from jd_prods_cart
+    where Cid = #{cid,jdbcType=INTEGER}
+      and proid = #{proid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="po.JdProdsCartExample" >
+    delete from jd_prods_cart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.JdProdsCartKey" >
+    insert into jd_prods_cart (Cid, proid)
+    values (#{cid,jdbcType=INTEGER}, #{proid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="po.JdProdsCartKey" >
+    insert into jd_prods_cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        Cid,
+      </if>
+      <if test="proid != null" >
+        proid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="proid != null" >
+        #{proid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.JdProdsCartExample" resultType="java.lang.Integer" >
+    select count(*) from jd_prods_cart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update jd_prods_cart
+    <set >
+      <if test="record.cid != null" >
+        Cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.proid != null" >
+        proid = #{record.proid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update jd_prods_cart
+    set Cid = #{record.cid,jdbcType=INTEGER},
+      proid = #{record.proid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectcart" parameterType="po.JdProdsCartKey" resultType="java.lang.Integer" >
+    select count(*) from jd_prods_cart WHERE Cid = #{cid} AND proid =#{proid}
+  </select>
+  <select id="selectProdsnum" resultType="java.lang.Integer" >
+    select count(*) from jd_prods_cart WHERE Cid = #{cid}
+  </select>
+  <select id="selectJdProds" resultMap="JdProds">
+    select * from jd_prods_cart a , jd_prods b WHERE a.Cid = #{cid} AND a.proid = b.proid;
+  </select>
+  <resultMap id="JdProds" type="po.JdProds">
+    <id column="proid1" property="proid"></id>
+    <result column="name" property="name"></result>
+    <result column="brand" property="brand"></result>
+    <result column="promessage" property="promessage"></result>
+    <result column="price" property="price"></result>
+    <result column="discount" property="discount"></result>
+    <result column="zimg" property="zimg"></result>
+    <result column="stoid" property="stoid"></result>
+  </resultMap>
+</mapper>

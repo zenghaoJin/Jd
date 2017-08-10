@@ -10,7 +10,7 @@ public interface JdUserMapper {
 
     int deleteByExample(JdUserExample example);
 
-    int deleteByPrimaryKey(Integer uId);
+    int deleteByPrimaryKey(Integer uid);
 
     int insert(JdUser record);
 
@@ -18,7 +18,7 @@ public interface JdUserMapper {
 
     List<JdUser> selectByExample(JdUserExample example);
 
-    JdUser selectByPrimaryKey(Integer uId);
+    JdUser selectByPrimaryKey(Integer uid);
 
     int updateByExampleSelective(@Param("record") JdUser record, @Param("example") JdUserExample example);
 
@@ -41,4 +41,6 @@ public interface JdUserMapper {
     JdUser select_Email(String email);
 
     void updateUser(JdUser jdUser);
+
+    JdUser selectmoney(String uid);
 }

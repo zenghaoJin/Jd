@@ -2,15 +2,14 @@ package mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import po.JdStores;
-import po.JdStoresExample;
+import po.*;
 
 public interface JdStoresMapper {
     int countByExample(JdStoresExample example);
 
     int deleteByExample(JdStoresExample example);
 
-    int deleteByPrimaryKey(Integer stoId);
+    int deleteByPrimaryKey(Integer stoid);
 
     int insert(JdStores record);
 
@@ -18,7 +17,7 @@ public interface JdStoresMapper {
 
     List<JdStores> selectByExample(JdStoresExample example);
 
-    JdStores selectByPrimaryKey(Integer stoId);
+    JdStores selectByPrimaryKey(Integer stoid);
 
     int updateByExampleSelective(@Param("record") JdStores record, @Param("example") JdStoresExample example);
 
@@ -31,4 +30,17 @@ public interface JdStoresMapper {
     int findStores(JdStores jdStores);
 
     JdStores selectStores(String pname);
+
+    List<JdProds> selectJdprods(String stoid);
+
+    List<JdProdimg> selectJdprodImg(String proid);
+
+    List<JdZoomimg> selectZoomimg(String pimgid);
+
+    List<JdSizes> selectSizes(String pimgid);
+
+    JdProds selectOjdprods(String proid);
+
+    List<JdProds> selectSjdprods();
+
 }

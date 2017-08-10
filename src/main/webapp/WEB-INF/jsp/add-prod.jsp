@@ -13,6 +13,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>增加商品</title>
+    <link rel="stylesheet" type="text/css" href="styles/simditor.css" />
+
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="scripts/module.min.js"></script>
+    <script type="text/javascript" src="scripts/hotkeys.min.js"></script>
+    <script type="text/javascript" src="scripts/uploader.min.js"></script>
+    <script type="text/javascript" src="scripts/simditor.min.js"></script>
     <!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
@@ -27,9 +34,10 @@
             var val2 = $(":input[name='brand']").val();
             var val3 = $(":input[name='price']").val();
             var val4 = $(":input[name='discount']").val();
-            var val5 = $(":input[name='proMessage']").val();
-            var val6 = $("input[id='sizeCheckbox']:checked").length;
+            var val5 = $(":input[name='promessage']").val();
+            var val6 = $("input[name='sizeCheckbox']:checked").length;
             var val7 = Number($("#imgSelect option:selected").val());
+            var val8 = $(":input[name='zhuimg']").val();
             var str =new RegExp("^[0-9]+(.[0-9]+)?$");
             var str2 = new RegExp("^(\\d|[1-9]\\d|100)$");
             var str3 = /(?:jpg|gif|png|jpeg)$/;
@@ -76,17 +84,96 @@
                 $("#sizeInfo input").val("至少有一种尺寸").css("color", "#FF0000");
                 return false;
             }
-            var num1 = $("#prodImg").find(":input[name='img']");
-            var num2 = $("#prodImg").find(":input[name='iname']");
-            var num3 = $("#prodImg").find(":input[name='number']");
-            if (!(num1.val().length > 0 && num2.val().length > 0 && num3.val().length > 0)) {
-                $("#prodImgInfo1").show();
-                $("#prodImgInfo1 input").show();
-                $("#prodImgInfo1 img").attr('src', 'images/sign_up2.png');
-                $("#prodImgInfo1 input").val("款式信息填写有遗漏").css("color", "#FF0000");
+            $("input[name='sizeCheckbox']:checked").each(function(){
+                if(!(0<$(this).val().length&&$(this).val().length<=8)){
+                    $("#sizeInfo").show();
+                    $("#sizeInfo input").show();
+                    $("#sizeInfo img").attr('src', 'images/sign_up2.png');
+                    $("#sizeInfo input").val("尺寸描述格式有误").css("color", "#FF0000");
+                }
+            })
+
+            if(!$("#sizeInfo").is(":hidden")){
                 return false;
             }
+            if(val8.length<=0){
+                    $("#ZimgInfo").show();
+                    $("#ZimgInfo input").show();
+                    $("#ZimgInfo img").attr('src', 'images/sign_up2.png');
+                    $("#ZimgInfo input").val("主图未填").css("color", "#FF0000");
+                    return false;
+            }else{
+                if(str2.test(val8)){
+                $("#ZimgInfo").show();
+                $("#ZimgInfo input").show();
+                $("#ZimgInfo img").attr('src','images/sign_up2.png');
+                $("#ZimgInfo input").val("主图格式有误").css("color","#FF0000");
+                return false;
+                }
+            }
 
+            $("#prodImg").find(":input[name='img']").each(function(){
+                var num1 = $(this).parent().parent().attr("id");
+                num1 = num1.substring(num1.length-1,num1.length)
+                if(!($(this).val().length>0)){
+                    $("#prodImgInfo1").show();
+                    $("#prodImgInfo1 input").show();
+                    $("#prodImgInfo1 img").attr('src', 'images/sign_up2.png');
+                    $("#prodImgInfo1 input").val("款式"+num1+"图片未填").css("color", "#FF0000");
+                    return false;
+                }else{
+                    if(!str3.test($(this).val())){
+                        $("#prodImgInfo1").show();
+                        $("#prodImgInfo1 input").show();
+                        $("#prodImgInfo1 img").attr('src', 'images/sign_up2.png');
+                        $("#prodImgInfo1 input").val("款式"+num1+"图片格式有误").css("color", "#FF0000");
+                        return false;
+                    }
+                }
+            });
+
+            $("#prodImg").find(":input[name='iname']").each(function(){
+                var num2 = $(this).parent().parent().attr("id");
+                num2 = num2.substring(num2.length-1,num2.length)
+                if(!($(this).val().length>0)){
+                    $("#prodImgInfo2").show();
+                    $("#prodImgInfo2 input").show();
+                    $("#prodImgInfo2 img").attr('src', 'images/sign_up2.png');
+                    $("#prodImgInfo2 input").val("款式"+num2+"简介未填").css("color", "#FF0000");
+                    return false;
+                }else{
+                    if(!($(this).val().length<=10)){
+                        $("#prodImgInfo2").show();
+                        $("#prodImgInfo2 input").show();
+                        $("#prodImgInfo2 img").attr('src', 'images/sign_up2.png');
+                        $("#prodImgInfo2 input").val("款式"+num2+"简介格式有误").css("color", "#FF0000");
+                        return false;
+                    }
+                }
+            });
+
+            $("#prodImg").find(":input[name='number']").each(function(){
+                var num3= $(this).parent().parent().attr("id");
+                num3 = num3.substring(num3.length-1,num3.length)
+                if(!($(this).val().length>0)){
+                    $("#prodImgInfo3").show();
+                    $("#prodImgInfo3 input").show();
+                    $("#prodImgInfo3 img").attr('src', 'images/sign_up2.png');
+                    $("#prodImgInfo3 input").val("款式"+num3+"数量未填").css("color", "#FF0000");
+                    return false;
+                }else{
+                    if(!str4.test($(this).val())){
+                        $("#prodImgInfo3").show();
+                        $("#prodImgInfo3 input").show();
+                        $("#prodImgInfo3 img").attr('src', 'images/sign_up2.png');
+                        $("#prodImgInfo3 input").val("款式"+num3+"数量填写有误").css("color", "#FF0000");
+                        return false;
+                    }
+                }
+            });
+            if(!$("#prodImgInfo1").is(":hidden")||!$("#prodImgInfo2").is(":hidden")||!$("#prodImgInfo3").is(":hidden")){
+                return false;
+            }
         }
         $(function(){
             $(":input[name='name']").blur(function(){
@@ -155,7 +242,7 @@
                 $("#discountInfo img").attr('src','images/sign_up1.png');
                 $("#discountInfo input").val("正确格式：1-100").css("color","#8d8a8a");
             })
-            $(":input[name='proMessage']").blur(function(){
+            $(":input[name='promessage']").blur(function(){
                 var val = $(this).val();
                 val = $.trim(val);
                 if(0<val.length&&val.length<=100){
@@ -173,7 +260,7 @@
             })
         })
         function sizeNum() {
-            var val = $("input[id='sizeCheckbox']:checked").length;
+            var val = $("input[name='sizeCheckbox']:checked").length;
             if(val>0&&$("#sizeInfo input").val()=="至少有一种尺寸"){
                 $("#sizeInfo").hide();
                 $("#sizeInfo input").hide();
@@ -181,7 +268,8 @@
         }
         function checkSize(v,x) {
                 var val = $.trim(v);
-                if($(x).prev().children('#sizeCheckbox').is(':checked')){
+                $(x).prev().children('input[name="sizeCheckbox"]').val(val);
+                if($(x).prev().children('input[name="sizeCheckbox"]').is(':checked')){
                     if (0 < val.length && val.length <= 8) {
                         $("#sizeInfo").hide();
                         $("#sizeInfo input").hide();
@@ -199,6 +287,19 @@
             $("#sizeInfo input").show();
             $("#sizeInfo img").attr('src','images/sign_up1.png');
             $("#sizeInfo input").val("如：XL/175(少于8个字)").css("color","#8d8a8a");
+        }
+        function checkZimg(v) {
+            var val = v.value;
+            var str = /(?:jpg|gif|png|jpeg)$/;
+            if(str.test(val)){
+                $("#ZimgInfo").hide();
+                $("#ZimgInfo input").hide();
+            }else{
+                $("#ZimgInfo").show();
+                $("#ZimgInfo input").show();
+                $("#ZimgInfo img").attr('src', 'images/sign_up2.png');
+                $("#ZimgInfo input").val("主图格式有误").css("color", "#FF0000");
+            }
         }
         function checkImg(v) {
             var num = $(v).parent().parent().attr("id");
@@ -254,7 +355,7 @@
                 "<label><br></label>"+
                 "<div class='form-group input-group'>"+
                     "<span class='input-group-addon'>"+
-                    "<input type='checkbox' id='sizeCheckbox' onclick='sizeNum()'/>"+
+                    "<input type='checkbox' name='sizeCheckbox' onclick='sizeNum()'/>"+
                     "</span>"+
                     "<input type='text' class='form-control' name='size' onfocus='checkSize2()' onblur='checkSize(this.value,this)'/>"+
                     "</div>"+
@@ -335,16 +436,16 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
                     <a  href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> 款式四</a>
                 </li>
                 <li  >
-                    <a  href="table.html"><i class="fa fa-table fa-3x"></i> 款式五</a>
+                    <a  href="/Jd/s_table?stoid=${sessionScope.jdStores.stoid}"><i class="fa fa-table fa-3x"></i>订单明细</a>
                 </li>
                 <li  >
-                    <a  href="form.html"><i class="fa fa-edit fa-3x"></i> 款式六 </a>
+                    <a  href="/Jd/s_select?stoid=${sessionScope.jdStores.stoid}"><i class="fa fa-edit fa-3x"></i> 查看自己 </a>
                 </li>
                 <li  >
-                    <a   href="registeration.html"><i class="fa fa-laptop fa-3x"></i> 款式七</a>
+                    <a   href="/Jd/s_update"><i class="fa fa-laptop fa-3x"></i> 个人信息</a>
                 </li>
                 <li  >
-                    <a class="active-menu"  href="addProd"><i class="fa fa-square-o fa-3x"></i> 增加商品页面</a>
+                    <a class="active-menu"  href="/Jd/addProd"><i class="fa fa-square-o fa-3x"></i> 增加商品页面</a>
                 </li>
             </ul>
 
@@ -359,7 +460,7 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
             <div class="row">
                 <div class="col-md-12">
                     <h2>增加商品页面</h2>
-                    <h5>XXX </h5>
+                    <h5>XX </h5>
                     <hr />
                     <div class="row">
                         <div class="col-md-6">
@@ -413,7 +514,7 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>商品信息：</label>
-                                                <textarea class="form-control" rows="3" name="proMessage" value="${prods.proMessage}"></textarea>
+                                                <textarea class="form-control" rows="3" name="promessage">${prods.promessage}</textarea>
                                                 <p class="help-block" id="proMessageInfo" style="display:none">
                                                     <img src="images/sign_up1.png" width="18" height="18">
                                                     <input type="text" readonly style="background:transparent;border:0;">
@@ -436,7 +537,7 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
                                         <label>尺寸描述：</label>
                                         <div class="form-group input-group">
 										    <span class="input-group-addon">
-								                <input type="checkbox" id="sizeCheckbox" onclick="sizeNum()"/>
+								                <input type="checkbox" name="sizeCheckbox" onclick="sizeNum()"/>
 									        </span>
                                             <input type="text" class="form-control" name="size" onfocus="checkSize2()" onblur="checkSize(this.value,this)"/>
                                         </div>
@@ -463,6 +564,22 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
                                         </p>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    设置主图
+                                </div>
+                                <div class="panel-body" >
+                                    <input type="file" name="zhuimg" onchange="checkZimg(this)"/>
+                                </div>
+                                <center>
+                                <p class="help-block" id="ZimgInfo" style="display:none">
+                                    <img src="images/sign_up1.png" width="18" height="18">
+                                    <input type="text" readonly style="background:transparent;border:0;">
+                                </p>
+                                </center>
                             </div>
                         </div>
                     </div>
@@ -523,14 +640,14 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
                 </div>
                 <!-- /. ROW  -->
             </div>
-                <input type="hidden" name="stoId" value="${sessionScope.jdStores.sto_Id}">
+                <input type="hidden" name="stoid" value="${sessionScope.jdStores.stoid}">
                 <center><input type="submit" value="提交" class="btn btn-info btn-lg"></center>
             </form>
             <center>
     <c:if test="${message!=null}">
     <c:forEach items="${message}" var="error">
         <img src="images/sign_up2.png" width="18" height="18">
-        <input type="text" readonly style="background:transparent;border:0;color: '#FF0000'" value="${error.defaultMessage}"><br>
+        <input type="text" readonly style="color:'#FF0000';background:transparent;border:0;" value="${error.defaultMessage}"><br>
     </c:forEach>
     </c:if>
             </center>

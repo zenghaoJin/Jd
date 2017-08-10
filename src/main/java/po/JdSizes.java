@@ -1,20 +1,20 @@
 package po;
 
 public class JdSizes {
-    private Integer sizeId;
+    private Integer sizeid;
 
     private String size;
 
     private String number;
 
-    private Integer proiId;
+    private Integer pimgid;
 
-    public Integer getSizeId() {
-        return sizeId;
+    public Integer getSizeid() {
+        return sizeid;
     }
 
-    public void setSizeId(Integer sizeId) {
-        this.sizeId = sizeId;
+    public void setSizeid(Integer sizeid) {
+        this.sizeid = sizeid;
     }
 
     public String getSize() {
@@ -33,11 +33,11 @@ public class JdSizes {
         this.number = number == null ? null : number.trim();
     }
 
-    public Integer getProiId() {
-        return proiId;
+    public Integer getPimgid() {
+        return pimgid;
     }
 
-    public void setProiId(Integer proiId) {
-        this.proiId = proiId;
+    public void setPimgid(Integer pimgid) {
+        this.pimgid = pimgid;
     }
 }

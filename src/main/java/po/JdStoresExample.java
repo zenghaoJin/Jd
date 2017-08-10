@@ -104,63 +104,63 @@ public class JdStoresExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andStoIdIsNull() {
-            addCriterion("sto_id is null");
+        public Criteria andStoidIsNull() {
+            addCriterion("stoid is null");
             return (Criteria) this;
         }
 
-        public Criteria andStoIdIsNotNull() {
-            addCriterion("sto_id is not null");
+        public Criteria andStoidIsNotNull() {
+            addCriterion("stoid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStoIdEqualTo(Integer value) {
-            addCriterion("sto_id =", value, "stoId");
+        public Criteria andStoidEqualTo(Integer value) {
+            addCriterion("stoid =", value, "stoid");
             return (Criteria) this;
         }
 
-        public Criteria andStoIdNotEqualTo(Integer value) {
-            addCriterion("sto_id <>", value, "stoId");
+        public Criteria andStoidNotEqualTo(Integer value) {
+            addCriterion("stoid <>", value, "stoid");
             return (Criteria) this;
         }
 
-        public Criteria andStoIdGreaterThan(Integer value) {
-            addCriterion("sto_id >", value, "stoId");
+        public Criteria andStoidGreaterThan(Integer value) {
+            addCriterion("stoid >", value, "stoid");
             return (Criteria) this;
         }
 
-        public Criteria andStoIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("sto_id >=", value, "stoId");
+        public Criteria andStoidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("stoid >=", value, "stoid");
             return (Criteria) this;
         }
 
-        public Criteria andStoIdLessThan(Integer value) {
-            addCriterion("sto_id <", value, "stoId");
+        public Criteria andStoidLessThan(Integer value) {
+            addCriterion("stoid <", value, "stoid");
             return (Criteria) this;
         }
 
-        public Criteria andStoIdLessThanOrEqualTo(Integer value) {
-            addCriterion("sto_id <=", value, "stoId");
+        public Criteria andStoidLessThanOrEqualTo(Integer value) {
+            addCriterion("stoid <=", value, "stoid");
             return (Criteria) this;
         }
 
-        public Criteria andStoIdIn(List<Integer> values) {
-            addCriterion("sto_id in", values, "stoId");
+        public Criteria andStoidIn(List<Integer> values) {
+            addCriterion("stoid in", values, "stoid");
             return (Criteria) this;
         }
 
-        public Criteria andStoIdNotIn(List<Integer> values) {
-            addCriterion("sto_id not in", values, "stoId");
+        public Criteria andStoidNotIn(List<Integer> values) {
+            addCriterion("stoid not in", values, "stoid");
             return (Criteria) this;
         }
 
-        public Criteria andStoIdBetween(Integer value1, Integer value2) {
-            addCriterion("sto_id between", value1, value2, "stoId");
+        public Criteria andStoidBetween(Integer value1, Integer value2) {
+            addCriterion("stoid between", value1, value2, "stoid");
             return (Criteria) this;
         }
 
-        public Criteria andStoIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("sto_id not between", value1, value2, "stoId");
+        public Criteria andStoidNotBetween(Integer value1, Integer value2) {
+            addCriterion("stoid not between", value1, value2, "stoid");
             return (Criteria) this;
         }
 

@@ -1,16 +1,12 @@
 package service.serviceimpl;
 
-import mapper.JdProdimgMapper;
-import mapper.JdProdsMapper;
-import mapper.JdSizesMapper;
-import mapper.JdStoresMapper;
+import mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import po.JdProdimg;
-import po.JdProds;
-import po.JdSizes;
-import po.JdStores;
+import po.*;
 import service.ProdsService;
+
+import java.util.List;
 
 /**
  * Created by 曾浩津 on 2017/7/29.
@@ -25,6 +21,27 @@ public class ProdsServiceImpl implements ProdsService{
     private JdSizesMapper jdSizesMapper;
     @Autowired
     private JdStoresMapper jdStoresMapper;
+    @Autowired
+    private JdZoomimgMapper jdZoomimgMapper;
+    @Autowired
+    private JdOrderStoresMapper jdOrderStoresMapper;
+    @Autowired
+    private JdOrderMapper jdOrderMapper;
+    @Override
+    public List<JdOrder> selectJdOrder(String stoid) throws Exception {
+        return jdOrderStoresMapper.selectJdOrder(stoid);
+    }
+
+    @Override
+    public void updateJdOrder_state(JdOrder jdOrder) throws Exception {
+        jdOrderMapper.updateByPrimaryKeySelective(jdOrder);
+    }
+
+    @Override
+    public JdSizes selectJdSizes(int sizeid) throws Exception {
+        return jdSizesMapper.selectByPrimaryKey(sizeid);
+    }
+
     @Override
     public void insertProds(JdProds prods) throws Exception {
         jdProdsMapper.insert(prods);
@@ -41,6 +58,11 @@ public class ProdsServiceImpl implements ProdsService{
     }
 
     @Override
+    public void insertZooming(JdZoomimg jdZoomimg) throws Exception {
+        jdZoomimgMapper.insert(jdZoomimg);
+    }
+
+    @Override
     public int s_login(JdStores jdStores) throws Exception {
         return jdStoresMapper.findStores(jdStores);
     }
@@ -49,4 +71,71 @@ public class ProdsServiceImpl implements ProdsService{
     public JdStores selectStores(String pname) throws Exception {
         return jdStoresMapper.selectStores(pname);
     }
+
+    @Override
+    public void updateStores(JdStores jdStores) throws Exception {
+        jdStoresMapper.updateByPrimaryKey(jdStores);
+    }
+
+    @Override
+    public List<JdProds> selectJdprods(String stoid) throws Exception {
+        return jdStoresMapper.selectJdprods(stoid);
+    }
+
+    @Override
+    public List<JdProdimg> selectJdProdimg(String proid) throws Exception {
+        return jdStoresMapper.selectJdprodImg(proid);
+    }
+
+    @Override
+    public List<JdZoomimg> selectZoomimg(String pimgid) throws Exception {
+        return jdStoresMapper.selectZoomimg(pimgid);
+    }
+
+    @Override
+    public List<JdSizes> selectSizes(String pimgid) throws Exception {
+        return jdStoresMapper.selectSizes(pimgid);
+    }
+
+    @Override
+    public JdProds selectOjdprods(String proid) throws Exception {
+        return jdStoresMapper.selectOjdprods(proid);
+    }
+
+    @Override
+    public int updateJdprods(JdProds jdProds) throws Exception {
+        return jdProdsMapper.updateByPrimaryKeySelective(jdProds);
+    }
+
+    @Override
+    public int updateJdsizes(JdSizes jdSizes) throws Exception {
+        return jdSizesMapper.updateByPrimaryKeySelective(jdSizes);
+    }
+
+    @Override
+    public int deleteJdsizes(int sizeid) throws Exception {
+        return jdSizesMapper.deleteByPrimaryKey(sizeid);
+    }
+
+    @Override
+    public int updateJdProdimg(JdProdimg jdProdimg) throws Exception {
+        return jdProdimgMapper.updateByPrimaryKeySelective(jdProdimg);
+    }
+
+    @Override
+    public int deleteJdProdimg(int pimgid) throws Exception {
+        return jdProdimgMapper.deleteByPrimaryKey(pimgid);
+    }
+
+    @Override
+    public int updateJdZooming(JdZoomimg jdZoomimg) throws Exception {
+        return jdZoomimgMapper.updateByPrimaryKeySelective(jdZoomimg);
+    }
+
+    @Override
+    public int deleteJdZooming(int zoomimgid) throws Exception {
+        return jdZoomimgMapper.deleteByPrimaryKey(zoomimgid);
+    }
+
+
 }

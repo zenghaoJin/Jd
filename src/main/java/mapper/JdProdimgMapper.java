@@ -10,7 +10,7 @@ public interface JdProdimgMapper {
 
     int deleteByExample(JdProdimgExample example);
 
-    int deleteByPrimaryKey(Integer pimgId);
+    int deleteByPrimaryKey(Integer pimgid);
 
     int insert(JdProdimg record);
 
@@ -18,7 +18,7 @@ public interface JdProdimgMapper {
 
     List<JdProdimg> selectByExample(JdProdimgExample example);
 
-    JdProdimg selectByPrimaryKey(Integer pimgId);
+    JdProdimg selectByPrimaryKey(Integer pimgid);
 
     int updateByExampleSelective(@Param("record") JdProdimg record, @Param("example") JdProdimgExample example);
 

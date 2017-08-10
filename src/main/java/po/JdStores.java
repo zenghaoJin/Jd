@@ -3,7 +3,7 @@ package po;
 import javax.validation.constraints.Pattern;
 
 public class JdStores {
-    private Integer sto_Id;
+    private Integer stoid;
 
     private String name;
     @Pattern(regexp="\\w{6,6}",message="{stop.pass.error}")
@@ -11,12 +11,12 @@ public class JdStores {
     @Pattern(regexp="\\w{7,7}",message="{stop.name.error}")
     private String pname;
 
-    public Integer getSto_Id() {
-        return sto_Id;
+    public Integer getStoid() {
+        return stoid;
     }
 
-    public void setSto_Id(Integer sto_Id) {
-        this.sto_Id = sto_Id;
+    public void setStoid(Integer stoid) {
+        this.stoid = stoid;
     }
 
     public String getName() {

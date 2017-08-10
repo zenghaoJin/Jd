@@ -1,20 +1,20 @@
 package po;
 
 public class JdProdimg {
-    private Integer pimgId;
+    private Integer pimgid;
 
     private String img;
 
     private String iname;
 
-    private Integer proId;
+    private Integer proid;
 
-    public Integer getPimgId() {
-        return pimgId;
+    public Integer getPimgid() {
+        return pimgid;
     }
 
-    public void setPimgId(Integer pimgId) {
-        this.pimgId = pimgId;
+    public void setPimgid(Integer pimgid) {
+        this.pimgid = pimgid;
     }
 
     public String getImg() {
@@ -33,11 +33,11 @@ public class JdProdimg {
         this.iname = iname == null ? null : iname.trim();
     }
 
-    public Integer getProId() {
-        return proId;
+    public Integer getProid() {
+        return proid;
     }
 
-    public void setProId(Integer proId) {
-        this.proId = proId;
+    public void setProid(Integer proid) {
+        this.proid = proid;
     }
 }

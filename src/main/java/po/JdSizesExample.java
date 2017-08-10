@@ -104,63 +104,63 @@ public class JdSizesExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andSizeIdIsNull() {
-            addCriterion("size_id is null");
+        public Criteria andSizeidIsNull() {
+            addCriterion("sizeid is null");
             return (Criteria) this;
         }
 
-        public Criteria andSizeIdIsNotNull() {
-            addCriterion("size_id is not null");
+        public Criteria andSizeidIsNotNull() {
+            addCriterion("sizeid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSizeIdEqualTo(Integer value) {
-            addCriterion("size_id =", value, "sizeId");
+        public Criteria andSizeidEqualTo(Integer value) {
+            addCriterion("sizeid =", value, "sizeid");
             return (Criteria) this;
         }
 
-        public Criteria andSizeIdNotEqualTo(Integer value) {
-            addCriterion("size_id <>", value, "sizeId");
+        public Criteria andSizeidNotEqualTo(Integer value) {
+            addCriterion("sizeid <>", value, "sizeid");
             return (Criteria) this;
         }
 
-        public Criteria andSizeIdGreaterThan(Integer value) {
-            addCriterion("size_id >", value, "sizeId");
+        public Criteria andSizeidGreaterThan(Integer value) {
+            addCriterion("sizeid >", value, "sizeid");
             return (Criteria) this;
         }
 
-        public Criteria andSizeIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("size_id >=", value, "sizeId");
+        public Criteria andSizeidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sizeid >=", value, "sizeid");
             return (Criteria) this;
         }
 
-        public Criteria andSizeIdLessThan(Integer value) {
-            addCriterion("size_id <", value, "sizeId");
+        public Criteria andSizeidLessThan(Integer value) {
+            addCriterion("sizeid <", value, "sizeid");
             return (Criteria) this;
         }
 
-        public Criteria andSizeIdLessThanOrEqualTo(Integer value) {
-            addCriterion("size_id <=", value, "sizeId");
+        public Criteria andSizeidLessThanOrEqualTo(Integer value) {
+            addCriterion("sizeid <=", value, "sizeid");
             return (Criteria) this;
         }
 
-        public Criteria andSizeIdIn(List<Integer> values) {
-            addCriterion("size_id in", values, "sizeId");
+        public Criteria andSizeidIn(List<Integer> values) {
+            addCriterion("sizeid in", values, "sizeid");
             return (Criteria) this;
         }
 
-        public Criteria andSizeIdNotIn(List<Integer> values) {
-            addCriterion("size_id not in", values, "sizeId");
+        public Criteria andSizeidNotIn(List<Integer> values) {
+            addCriterion("sizeid not in", values, "sizeid");
             return (Criteria) this;
         }
 
-        public Criteria andSizeIdBetween(Integer value1, Integer value2) {
-            addCriterion("size_id between", value1, value2, "sizeId");
+        public Criteria andSizeidBetween(Integer value1, Integer value2) {
+            addCriterion("sizeid between", value1, value2, "sizeid");
             return (Criteria) this;
         }
 
-        public Criteria andSizeIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("size_id not between", value1, value2, "sizeId");
+        public Criteria andSizeidNotBetween(Integer value1, Integer value2) {
+            addCriterion("sizeid not between", value1, value2, "sizeid");
             return (Criteria) this;
         }
 
@@ -304,63 +304,63 @@ public class JdSizesExample {
             return (Criteria) this;
         }
 
-        public Criteria andProiIdIsNull() {
-            addCriterion("proi_id is null");
+        public Criteria andPimgidIsNull() {
+            addCriterion("pimgid is null");
             return (Criteria) this;
         }
 
-        public Criteria andProiIdIsNotNull() {
-            addCriterion("proi_id is not null");
+        public Criteria andPimgidIsNotNull() {
+            addCriterion("pimgid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andProiIdEqualTo(Integer value) {
-            addCriterion("proi_id =", value, "proiId");
+        public Criteria andPimgidEqualTo(Integer value) {
+            addCriterion("pimgid =", value, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andProiIdNotEqualTo(Integer value) {
-            addCriterion("proi_id <>", value, "proiId");
+        public Criteria andPimgidNotEqualTo(Integer value) {
+            addCriterion("pimgid <>", value, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andProiIdGreaterThan(Integer value) {
-            addCriterion("proi_id >", value, "proiId");
+        public Criteria andPimgidGreaterThan(Integer value) {
+            addCriterion("pimgid >", value, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andProiIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("proi_id >=", value, "proiId");
+        public Criteria andPimgidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("pimgid >=", value, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andProiIdLessThan(Integer value) {
-            addCriterion("proi_id <", value, "proiId");
+        public Criteria andPimgidLessThan(Integer value) {
+            addCriterion("pimgid <", value, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andProiIdLessThanOrEqualTo(Integer value) {
-            addCriterion("proi_id <=", value, "proiId");
+        public Criteria andPimgidLessThanOrEqualTo(Integer value) {
+            addCriterion("pimgid <=", value, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andProiIdIn(List<Integer> values) {
-            addCriterion("proi_id in", values, "proiId");
+        public Criteria andPimgidIn(List<Integer> values) {
+            addCriterion("pimgid in", values, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andProiIdNotIn(List<Integer> values) {
-            addCriterion("proi_id not in", values, "proiId");
+        public Criteria andPimgidNotIn(List<Integer> values) {
+            addCriterion("pimgid not in", values, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andProiIdBetween(Integer value1, Integer value2) {
-            addCriterion("proi_id between", value1, value2, "proiId");
+        public Criteria andPimgidBetween(Integer value1, Integer value2) {
+            addCriterion("pimgid between", value1, value2, "pimgid");
             return (Criteria) this;
         }
 
-        public Criteria andProiIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("proi_id not between", value1, value2, "proiId");
+        public Criteria andPimgidNotBetween(Integer value1, Integer value2) {
+            addCriterion("pimgid not between", value1, value2, "pimgid");
             return (Criteria) this;
         }
     }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mapper.JdAdminMapper" >
   <resultMap id="BaseResultMap" type="po.JdAdmin" >
-    <id column="a_id" property="aId" jdbcType="INTEGER" />
+    <id column="aid" property="aid" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="pass" property="pass" jdbcType="VARCHAR" />
   </resultMap>
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    a_id, name, pass
+    aid, name, pass
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="po.JdAdminExample" >
     select
@@ -82,14 +82,14 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from jd_admin
-    where a_id = #{aId,jdbcType=INTEGER}
+    where aid = #{aid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from jd_admin
-    where a_id = #{aId,jdbcType=INTEGER}
+    where aid = #{aid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="po.JdAdminExample" >
     delete from jd_admin
@@ -98,16 +98,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="po.JdAdmin" >
-    insert into jd_admin (a_id, name, pass
+    insert into jd_admin (aid, name, pass
       )
-    values (#{aId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR}
+    values (#{aid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="po.JdAdmin" >
     insert into jd_admin
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="aId != null" >
-        a_id,
+      <if test="aid != null" >
+        aid,
       </if>
       <if test="name != null" >
         name,
@@ -117,8 +117,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="aId != null" >
-        #{aId,jdbcType=INTEGER},
+      <if test="aid != null" >
+        #{aid,jdbcType=INTEGER},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -137,8 +137,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update jd_admin
     <set >
-      <if test="record.aId != null" >
-        a_id = #{record.aId,jdbcType=INTEGER},
+      <if test="record.aid != null" >
+        aid = #{record.aid,jdbcType=INTEGER},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -153,7 +153,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update jd_admin
-    set a_id = #{record.aId,jdbcType=INTEGER},
+    set aid = #{record.aid,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       pass = #{record.pass,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -170,15 +170,15 @@
         pass = #{pass,jdbcType=VARCHAR},
       </if>
     </set>
-    where a_id = #{aId,jdbcType=INTEGER}
+    where aid = #{aid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="po.JdAdmin" >
     update jd_admin
     set name = #{name,jdbcType=VARCHAR},
       pass = #{pass,jdbcType=VARCHAR}
-    where a_id = #{aId,jdbcType=INTEGER}
+    where aid = #{aid,jdbcType=INTEGER}
   </update>
-  <select id="findAdmin" parameterType="po.JdAdmin" resultType="int">
-    SELECT count(*) FROM jd_admin WHERE pass=#{pass} AND name=#{name}
+  <select id="selectJdAdmin" parameterType="po.JdAdmin" resultType="java.lang.Integer" >
+    select count(*) from jd_admin WHERE name =#{name} AND pass =#{pass}
   </select>
 </mapper>

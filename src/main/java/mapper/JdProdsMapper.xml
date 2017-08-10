@@ -2,13 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mapper.JdProdsMapper" >
   <resultMap id="BaseResultMap" type="po.JdProds" >
-    <id column="pro_id" property="proId" jdbcType="INTEGER" />
+    <id column="proid" property="proid" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="brand" property="brand" jdbcType="VARCHAR" />
-    <result column="pro_message" property="proMessage" jdbcType="VARCHAR" />
+    <result column="promessage" property="promessage" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="VARCHAR" />
     <result column="discount" property="discount" jdbcType="VARCHAR" />
-    <result column="sto_id" property="stoId" jdbcType="INTEGER" />
+    <result column="stoid" property="stoid" jdbcType="INTEGER" />
+    <result column="zimg" property="zimg" jdbcType="VARCHAR" />
+    <result column="thid" property="thid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    pro_id, name, brand, pro_message, price, discount, sto_id
+    proid, name, brand, promessage, price, discount, stoid, zimg, thid
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="po.JdProdsExample" >
     select
@@ -89,11 +91,11 @@
     select 
     <include refid="Base_Column_List" />
     from jd_prods
-    where pro_id = #{proId,jdbcType=INTEGER}
+    where proid = #{proid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from jd_prods
-    where pro_id = #{proId,jdbcType=INTEGER}
+    where proid = #{proid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="po.JdProdsExample" >
     delete from jd_prods
@@ -101,19 +103,19 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="po.JdProds" useGeneratedKeys="true" keyProperty="proId">
-    insert into jd_prods (pro_id, name, brand, 
-      pro_message, price, discount, 
-      sto_id)
-    values (#{proId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
-      #{proMessage,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{discount,jdbcType=VARCHAR}, 
-      #{stoId,jdbcType=INTEGER})
+  <insert id="insert" parameterType="po.JdProds" useGeneratedKeys="true" keyProperty="proid">
+    insert into jd_prods (proid, name, brand, 
+      promessage, price, discount, 
+      stoid, zimg, thid)
+    values (#{proid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{promessage,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{discount,jdbcType=VARCHAR}, 
+      #{stoid,jdbcType=INTEGER}, #{zimg,jdbcType=VARCHAR}, #{thid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="po.JdProds" >
     insert into jd_prods
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="proId != null" >
-        pro_id,
+      <if test="proid != null" >
+        proid,
       </if>
       <if test="name != null" >
         name,
@@ -121,8 +123,8 @@
       <if test="brand != null" >
         brand,
       </if>
-      <if test="proMessage != null" >
-        pro_message,
+      <if test="promessage != null" >
+        promessage,
       </if>
       <if test="price != null" >
         price,
@@ -130,13 +132,19 @@
       <if test="discount != null" >
         discount,
       </if>
-      <if test="stoId != null" >
-        sto_id,
+      <if test="stoid != null" >
+        stoid,
+      </if>
+      <if test="zimg != null" >
+        zimg,
+      </if>
+      <if test="thid != null" >
+        thid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="proId != null" >
-        #{proId,jdbcType=INTEGER},
+      <if test="proid != null" >
+        #{proid,jdbcType=INTEGER},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -144,8 +152,8 @@
       <if test="brand != null" >
         #{brand,jdbcType=VARCHAR},
       </if>
-      <if test="proMessage != null" >
-        #{proMessage,jdbcType=VARCHAR},
+      <if test="promessage != null" >
+        #{promessage,jdbcType=VARCHAR},
       </if>
       <if test="price != null" >
         #{price,jdbcType=VARCHAR},
@@ -153,8 +161,14 @@
       <if test="discount != null" >
         #{discount,jdbcType=VARCHAR},
       </if>
-      <if test="stoId != null" >
-        #{stoId,jdbcType=INTEGER},
+      <if test="stoid != null" >
+        #{stoid,jdbcType=INTEGER},
+      </if>
+      <if test="zimg != null" >
+        #{zimg,jdbcType=VARCHAR},
+      </if>
+      <if test="thid != null" >
+        #{thid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -167,8 +181,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update jd_prods
     <set >
-      <if test="record.proId != null" >
-        pro_id = #{record.proId,jdbcType=INTEGER},
+      <if test="record.proid != null" >
+        proid = #{record.proid,jdbcType=INTEGER},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -176,8 +190,8 @@
       <if test="record.brand != null" >
         brand = #{record.brand,jdbcType=VARCHAR},
       </if>
-      <if test="record.proMessage != null" >
-        pro_message = #{record.proMessage,jdbcType=VARCHAR},
+      <if test="record.promessage != null" >
+        promessage = #{record.promessage,jdbcType=VARCHAR},
       </if>
       <if test="record.price != null" >
         price = #{record.price,jdbcType=VARCHAR},
@@ -185,8 +199,14 @@
       <if test="record.discount != null" >
         discount = #{record.discount,jdbcType=VARCHAR},
       </if>
-      <if test="record.stoId != null" >
-        sto_id = #{record.stoId,jdbcType=INTEGER},
+      <if test="record.stoid != null" >
+        stoid = #{record.stoid,jdbcType=INTEGER},
+      </if>
+      <if test="record.zimg != null" >
+        zimg = #{record.zimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thid != null" >
+        thid = #{record.thid,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -195,13 +215,15 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update jd_prods
-    set pro_id = #{record.proId,jdbcType=INTEGER},
+    set proid = #{record.proid,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       brand = #{record.brand,jdbcType=VARCHAR},
-      pro_message = #{record.proMessage,jdbcType=VARCHAR},
+      promessage = #{record.promessage,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=VARCHAR},
       discount = #{record.discount,jdbcType=VARCHAR},
-      sto_id = #{record.stoId,jdbcType=INTEGER}
+      stoid = #{record.stoid,jdbcType=INTEGER},
+      zimg = #{record.zimg,jdbcType=VARCHAR},
+      thid = #{record.thid,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -215,8 +237,8 @@
       <if test="brand != null" >
         brand = #{brand,jdbcType=VARCHAR},
       </if>
-      <if test="proMessage != null" >
-        pro_message = #{proMessage,jdbcType=VARCHAR},
+      <if test="promessage != null" >
+        promessage = #{promessage,jdbcType=VARCHAR},
       </if>
       <if test="price != null" >
         price = #{price,jdbcType=VARCHAR},
@@ -224,20 +246,52 @@
       <if test="discount != null" >
         discount = #{discount,jdbcType=VARCHAR},
       </if>
-      <if test="stoId != null" >
-        sto_id = #{stoId,jdbcType=INTEGER},
+      <if test="stoid != null" >
+        stoid = #{stoid,jdbcType=INTEGER},
+      </if>
+      <if test="zimg != null" >
+        zimg = #{zimg,jdbcType=VARCHAR},
+      </if>
+      <if test="thid != null" >
+        thid = #{thid,jdbcType=INTEGER},
       </if>
     </set>
-    where pro_id = #{proId,jdbcType=INTEGER}
+    where proid = #{proid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="po.JdProds" >
     update jd_prods
     set name = #{name,jdbcType=VARCHAR},
       brand = #{brand,jdbcType=VARCHAR},
-      pro_message = #{proMessage,jdbcType=VARCHAR},
+      promessage = #{promessage,jdbcType=VARCHAR},
       price = #{price,jdbcType=VARCHAR},
       discount = #{discount,jdbcType=VARCHAR},
-      sto_id = #{stoId,jdbcType=INTEGER}
-    where pro_id = #{proId,jdbcType=INTEGER}
+      stoid = #{stoid,jdbcType=INTEGER},
+      zimg = #{zimg,jdbcType=VARCHAR},
+      thid = #{thid,jdbcType=INTEGER}
+    where proid = #{proid,jdbcType=INTEGER}
   </update>
+  <select id="selectJdProds_thid" resultType="po.JdProds" >
+    select * from jd_prods WHERE thid =#{thid}
+  </select>
+  <select id="selectJdProds" resultType="po.JdProds" >
+    select * from jd_prods
+  </select>
+  <select id="selectJdProds_price" resultType="po.JdProds" >
+    select * from jd_prods  order  by price desc
+  </select>
+  <select id="selectJdProds_price2" resultType="po.JdProds" >
+    select * from jd_prods  order  by price asc
+  </select>
+  <select id="selectJdProds_thid_price" resultType="po.JdProds" >
+    select * from jd_prods WHERE thid =#{thid} order  by price desc
+  </select>
+  <select id="selectJdProds_thid_price2" resultType="po.JdProds" >
+    select * from jd_prods WHERE thid =#{thid}  order  by price asc
+  </select>
+  <select id="selectOJdSizes" resultType="po.JdSizes" >
+    select * from jd_sizes WHERE sizeid =#{sizeid}
+  </select>
+  <select id="selectOJdProdimg" resultType="po.JdProdimg" >
+    select * from jd_prodimg WHERE pimgid =#{pimgid}
+  </select>
 </mapper>

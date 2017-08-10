@@ -50,10 +50,10 @@
             var val1 = $(":input[name='name']").val();
             var val2 = $(":input[name='email']").val();
             var val3 = $(":input[name='pass']").val();
-            var val4 = $(":input[name='phoneNumber']").val();
+            var val4 = $(":input[name='phonenumber']").val();
             var val5 = $(":input[name='pnum']").val();
             var val6 = $(":input[name='acticode']").val();
-            var str1 = /^[A-Za-z0-9]{7}$/;
+            var str1 = new RegExp("([\u4e00-\u9fa5]{4,7})|([A-Za-z0-9 ]{4,7})");
             var str2 = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
             var str3 =/^[A-Za-z0-9]{6}$/;
             var str4 =/^1[34578]\d{9}$/;
@@ -125,7 +125,7 @@
             $(":input[name='name']").blur(function(){
                 var val = $(this).val();
                 val = $.trim(val);
-                var str = /^[A-Za-z0-9]{7}$/;
+                var str = new RegExp("([\u4e00-\u9fa5]{4,7})|([A-Za-z0-9 ]{4,7})");
                 if(str.test(val)){
                     var url = "${pageContext.request.contextPath}/checkUname";
                     var args = {"name":val,"time":new Date()};
@@ -146,7 +146,7 @@
             }).focus(function(){
                 $("#nameInfo").show();
                 $("#nameInfo img").attr('src','images/sign_up1.png');
-                $("#nameInfo input").val("用户名的长度为7位").css("color","#8d8a8a");
+                $("#nameInfo input").val("用户名为4-7位中文或字母和数字").css("color","#8d8a8a");
         });
             $(":input[name='email']").blur(function(){
                 var val2 = $(this).val();
@@ -190,7 +190,7 @@
                 $("#passInfo img").attr('src','images/sign_up1.png');
                 $("#passInfo input").val("请输入6位数的密码").css("color","#8d8a8a");
             });
-            $(":input[name='phoneNumber']").blur(function(){
+            $(":input[name='phonenumber']").blur(function(){
                 var val4 = $(this).val();
                 val4 = $.trim(val4);
                 var str4 = /^1[34578]\d{9}$/ ;
@@ -210,7 +210,7 @@
             $('#num').click(function() {
                 var url = "${pageContext.request.contextPath}/num";
                 var args = {"time":new Date()};
-                var val5 = $(":input[name='phoneNumber']").val();
+                var val5 = $(":input[name='phonenumber']").val();
                 val5 = $.trim(val5);
                 var str5 = /^1[34578]\d{9}$/ ;
                 if(str5.test(val5)){
@@ -276,7 +276,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"placeholder="手机号码" autocomplete="off" value="${jdUser.phoneNumber}">
+                    <input type="text" class="form-control" id="phonenumber" name="phonenumber"placeholder="手机号码" autocomplete="off" value="${jdUser.phonenumber}">
                     <div id="phoneInfo" style="display: none">
                         <img src="images/sign_up2.png" width="18" height="18" border="0">
                         <input type="text" readonly style="background:transparent;border:0;">

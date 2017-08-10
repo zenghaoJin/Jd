@@ -60,6 +60,15 @@
       <root url="jar://H:/jar包/文件上传jar包/commons-fileupload-1.2.2.jar!/" />
       <root url="jar://H:/jar包/文件上传jar包/commons-io-2.4.jar!/" />
       <root url="jar://H:/jar包/ssm框架jar包/commons-logging-1.1.1.jar!/" />
+      <root url="jar://H:/jar包/pageHelper分页配置/jsqlparser-0.9.4.jar!/" />
+      <root url="jar://H:/jar包/pageHelper分页配置/pagehelper-4.1.1.jar!/" />
+      <root url="jar://H:/jar包/json的jar包/nutz-1.r.61.jar!/" />
+      <root url="jar://H:/jar包/list转为json__jar包/json/commons-beanutils-1.7.0.jar!/" />
+      <root url="jar://H:/jar包/list转为json__jar包/json/commons-collections-3.1.jar!/" />
+      <root url="jar://H:/jar包/list转为json__jar包/json/commons-lang-2.5.jar!/" />
+      <root url="jar://H:/jar包/list转为json__jar包/json/commons-logging.jar!/" />
+      <root url="jar://H:/jar包/list转为json__jar包/json/ezmorph-1.0.3.jar!/" />
+      <root url="jar://H:/jar包/list转为json__jar包/json/json-lib-2.4-jdk15.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

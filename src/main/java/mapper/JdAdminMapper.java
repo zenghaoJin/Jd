@@ -10,7 +10,7 @@ public interface JdAdminMapper {
 
     int deleteByExample(JdAdminExample example);
 
-    int deleteByPrimaryKey(Integer aId);
+    int deleteByPrimaryKey(Integer aid);
 
     int insert(JdAdmin record);
 
@@ -18,7 +18,7 @@ public interface JdAdminMapper {
 
     List<JdAdmin> selectByExample(JdAdminExample example);
 
-    JdAdmin selectByPrimaryKey(Integer aId);
+    JdAdmin selectByPrimaryKey(Integer aid);
 
     int updateByExampleSelective(@Param("record") JdAdmin record, @Param("example") JdAdminExample example);
 
@@ -28,5 +28,5 @@ public interface JdAdminMapper {
 
     int updateByPrimaryKey(JdAdmin record);
 
-    int findAdmin(JdAdmin JdAdmin);
+    int selectJdAdmin(JdAdmin jdAdmin);
 }

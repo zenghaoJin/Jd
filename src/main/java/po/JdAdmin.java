@@ -1,18 +1,20 @@
 package po;
 
+import javax.validation.constraints.Pattern;
+
 public class JdAdmin {
-    private Integer aId;
-
+    private Integer aid;
+    @Pattern(regexp="^.{5,10}$",message="{admin.name.error}")
     private String name;
-
+    @Pattern(regexp="^.{5,10}$",message="{admin.pass.error}")
     private String pass;
 
-    public Integer getaId() {
-        return aId;
+    public Integer getAid() {
+        return aid;
     }
 
-    public void setaId(Integer aId) {
-        this.aId = aId;
+    public void setAid(Integer aid) {
+        this.aid = aid;
     }
 
     public String getName() {
