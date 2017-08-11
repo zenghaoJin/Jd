@@ -235,6 +235,11 @@ public class  UserServiceImpl implements UserService{
     }
 
     @Override
+    public void updateMessage(JdMessage jdMessage) throws Exception {
+        jdMessageMapper.updateByPrimaryKeySelective(jdMessage);
+    }
+
+    @Override
     public List<JdMessage> selectMessage2(int uid) throws Exception {
         return jdMessageMapper.selectMessage2(uid);
     }

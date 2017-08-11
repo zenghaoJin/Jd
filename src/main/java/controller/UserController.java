@@ -79,11 +79,13 @@ public class UserController {
             JdMessage s2 = new JdMessage();
             s2.setMid(mid);
             s2.setState("1");
+            userService.updateMessage(s2);
             JdMessage s1 = new JdMessage();
             s1.setMessage(message);
             s1.setUid(uid);
             s1.setStoid(stoid);
             s1.setState("0");
+            userService.insertMessage(s1);
         }
         return "prod";
     }
