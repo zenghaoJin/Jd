@@ -208,4 +208,10 @@
       state = #{state,jdbcType=VARCHAR}
     where Mid = #{mid,jdbcType=INTEGER}
   </update>
+  <select id="selectMessage"  resultType="po.JdMessage" >
+    select * from jd_message WHERE stoid = #{stoid} AND state = 0
+  </select>
+  <select id="selectMessage2"  resultType="po.JdMessage" >
+    select * from jd_message WHERE uid = #{uid} AND state = 0
+  </select>
 </mapper>

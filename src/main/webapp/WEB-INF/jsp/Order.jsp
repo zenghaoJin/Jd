@@ -96,7 +96,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <c:if test="${sessionScope.JdUser!=null}">
                     <a href="/Jd/cart?uid=${sessionScope.JdUser.uid}&cid=${sessionScope.cid==null?0:sessionScope.cid}">
                         <h3 id="cart"></h3></a>
-                    <p><a href="javascript:;" class="simpleCart_empty">空购物车</a></p>
+                    <p><a href="/Jd/message?uid=${sessionScope.JdUser.uid}" class="simpleCart_empty">查看订单</a></p>
                 </c:if>
             </div>
 

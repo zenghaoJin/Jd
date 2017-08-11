@@ -309,7 +309,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/outAdmin" class="btn btn-danger square-btn-adjust">注销</a> </div>
+font-size: 16px;"><a href="/Jd/outAdmin" class="btn btn-danger square-btn-adjust">注销</a> </div>
     </nav>
     <!-- /. NAV TOP  -->
     <nav class="navbar-default navbar-side" role="navigation">
@@ -318,26 +318,8 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/outAdmin" class="bt
                 <li class="text-center">
                     <img src="assets/img/find_user.png" class="user-image img-responsive"/>
                 </li>
-                <li>
-                    <a  href="index.html"><i class="fa fa-dashboard fa-3x"></i> 款式一</a>
-                </li>
-                <li>
-                    <a  href="ui.html"><i class="fa fa-desktop fa-3x"></i> 款式二</a>
-                </li>
-                <li>
-                    <a  href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> 款式三</a>
-                </li>
                 <li  >
-                    <a  href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> 款式四</a>
-                </li>
-                <li  >
-                    <a  href="table.html"><i class="fa fa-table fa-3x"></i> 款式五</a>
-                </li>
-                <li  >
-                    <a  href="form.html"><i class="fa fa-edit fa-3x"></i> 款式六 </a>
-                </li>
-                <li  >
-                    <a  class="active-menu" href="/Jd/update-pseries"><i class="fa fa-laptop fa-3x"></i>修改商品分类</a>
+                    <a class="active-menu"  href="/Jd/update-pseries"><i class="fa fa-laptop fa-3x"></i>修改商品分类</a>
                 </li>
                 <li  >
                     <a   href="/Jd/add_pseries"><i class="fa fa-square-o fa-3x"></i> 增加商品类别</a>

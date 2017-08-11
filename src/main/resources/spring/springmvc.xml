@@ -32,7 +32,13 @@
 	 -->
 	<mvc:annotation-driven validator="validator"></mvc:annotation-driven>
 	<mvc:default-servlet-handler></mvc:default-servlet-handler>
-
+	<!--<mvc:interceptors>-->
+		<!--&lt;!&ndash; 多个拦截器，顺序执行 &ndash;&gt;-->
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/**"/>-->
+			<!--<bean class="tool.LoginInterceptor"></bean>-->
+		<!--</mvc:interceptor>-->
+	<!--</mvc:interceptors>-->
 	<!-- 校验器 -->
 	<bean id="validator"
 		  class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">

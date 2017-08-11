@@ -24,4 +24,8 @@ public interface JdOrderStoresMapper {
     int updateByExample(@Param("record") JdOrderStoresKey record, @Param("example") JdOrderStoresExample example);
 
     List<JdOrder> selectJdOrder(String stoid);
+
+    List<JdOrder> selectJdOrder_User(int uid);
+
+    int selectStoid(int oid);
 }

@@ -46,5 +46,5 @@ public interface JdProdsMapper {
 
     JdProdimg selectOJdProdimg(String pimgid);
 
-
+    List<JdProds> selectJdProds_brand(String brand);
 }

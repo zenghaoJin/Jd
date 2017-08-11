@@ -27,6 +27,8 @@ public class ProdsServiceImpl implements ProdsService{
     private JdOrderStoresMapper jdOrderStoresMapper;
     @Autowired
     private JdOrderMapper jdOrderMapper;
+    @Autowired
+    private JdMessageMapper jdMessageMapper;
     @Override
     public List<JdOrder> selectJdOrder(String stoid) throws Exception {
         return jdOrderStoresMapper.selectJdOrder(stoid);
@@ -40,6 +42,21 @@ public class ProdsServiceImpl implements ProdsService{
     @Override
     public JdSizes selectJdSizes(int sizeid) throws Exception {
         return jdSizesMapper.selectByPrimaryKey(sizeid);
+    }
+
+    @Override
+    public List<JdMessage> selectMessage(int stoid) throws Exception {
+        return jdMessageMapper.selectMessage(stoid);
+    }
+
+    @Override
+    public void updateMessage(JdMessage jdMessage) throws Exception {
+        jdMessageMapper.updateByPrimaryKeySelective(jdMessage);
+    }
+
+    @Override
+    public void insertMessage(JdMessage jdMessage) throws Exception {
+        jdMessageMapper.insert(jdMessage);
     }
 
     @Override

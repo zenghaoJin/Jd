@@ -155,4 +155,10 @@
     <result column="num" property="num"></result>
     <result column="sizeid" property="sizeid"></result>
   </resultMap>
+  <select id="selectJdOrder_User" resultMap="JdOrder">
+    select * from jd_order_stores a inner join jd_order b on a.Oid = b.Oid AND uid = #{uid}
+  </select>
+  <select id="selectStoid" resultType="java.lang.Integer">
+    select a.stoid from jd_order_stores a WHERE Oid = #{oid}
+  </select>
 </mapper>

@@ -5,6 +5,7 @@
   Time: 18:15
   To change this template use File | Settings | File Templates.
 --%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript" src="jq/jquery-1.7.2.js"></script>
@@ -53,6 +54,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     $("#cart").text("购物车:("+prodsnum+"件商品)").append("<img src='images/cart.png' alt=''/>");
                 })}
         });
+        function addmessage(v) {
+            $(":input[name='stoid']").val(v);
+            $(":input[name='mid']").val("0");
+            $("#message").html("联系商家:"+v)
+//            alert($(":input[name='stoid']").next().find("h4").html("联系商家："+v))
+        }
+        function change(v,x) {
+            $("#message").html("回复商家:"+x)
+            $(":input[name='mid']").val(v);
+            $(":input[name='stoid']").val(x);
+        }
+
     </script>
 </head>
 <body>
@@ -79,7 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </c:if>
                 <c:if test="${sessionScope.JdUser!=null}">
                     <a href="/Jd/cart?uid=${sessionScope.JdUser.uid}&cid=${sessionScope.cid==null?0:sessionScope.cid}"><h3 id="cart"></h3></a>
-                    <p><a href="javascript:;" class="simpleCart_empty">空购物车</a></p>
+                    <p><a href="/Jd/message?uid=${sessionScope.JdUser.uid}" class="simpleCart_empty">查看订单</a></p>
                 </c:if>
             </div>
         </div>
@@ -146,7 +159,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                 <table class="table" id="table2">
                                                     <thead>
                                                     <tr>
-                                                        <th width="80">用户id</th>
+                                                        <th width="80">商家id</th>
                                                         <th>地址</th>
                                                         <th width="250">收件人信息</th>
                                                         <th>订单状态</th>
@@ -159,7 +172,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                         <c:forEach var="i" begin="0" end="${JdOrder.size()-1}" step="1">
                                                             <c:if test="${(i+1)%6==1}">
                                                                 <tr class="success">
-                                                                    <td><a href="${JdOrder[i].uid}">${JdOrder[i].uid}</a></td>
+                                                                    <td><a href="javascript:void(0);" onclick="addmessage(${oid[i]})">${oid[i]}</a></td>
                                                                     <td>${JdOrder[i].address}</td>
                                                                     <td>${JdOrder[i].message}</td>
                                                                     <c:if test="${JdOrder[i].state==0}">
@@ -181,7 +194,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                             </c:if>
                                                             <c:if test="${(i+1)%6==2}">
                                                                 <tr class="info">
-                                                                    <td><a href="${JdOrder[i].uid}">${JdOrder[i].uid}</a></td>
+                                                                    <td><a href="javascript:void(0);" onclick="addmessage(${oid[i]})">${oid[i]}</a></td>
                                                                     <td>${JdOrder[i].address}</td>
                                                                     <td>${JdOrder[i].message}</td>
                                                                     <c:if test="${JdOrder[i].state==0}">
@@ -203,7 +216,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                             </c:if>
                                                             <c:if test="${(i+1)%6==3}">
                                                                 <tr class="warning">
-                                                                    <td><a href="${JdOrder[i].uid}">${JdOrder[i].uid}</a></td>
+                                                                    <td><a href="javascript:void(0);" onclick="addmessage(${oid[i]})">${oid[i]}</a></td>
                                                                     <td>${JdOrder[i].address}</td>
                                                                     <td>${JdOrder[i].message}</td>
                                                                     <c:if test="${JdOrder[i].state==0}">
@@ -225,7 +238,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                             </c:if>
                                                             <c:if test="${(i+1)%6==4}">
                                                                 <tr class="danger">
-                                                                    <td><a href="${JdOrder[i].uid}">${JdOrder[i].uid}</a></td>
+                                                                    <td><a href="javascript:void(0);" onclick="addmessage(${oid[i]})">${oid[i]}</a></td>
                                                                     <td>${JdOrder[i].address}</td>
                                                                     <td>${JdOrder[i].message}</td>
                                                                     <c:if test="${JdOrder[i].state==0}">
@@ -247,7 +260,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                             </c:if>
                                                             <c:if test="${(i+1)%6==5}">
                                                                 <tr class="success">
-                                                                    <td><a href="${JdOrder[i].uid}">${JdOrder[i].uid}</a></td>
+                                                                    <td><a href="javascript:void(0);" onclick="addmessage(${oid[i]})">${oid[i]}</a></td>
                                                                     <td>${JdOrder[i].address}</td>
                                                                     <td>${JdOrder[i].message}</td>
                                                                     <c:if test="${JdOrder[i].state==0}">
@@ -269,7 +282,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                             </c:if>
                                                             <c:if test="${(i+1)%6==0}">
                                                                 <tr class="info">
-                                                                    <td><a href="${JdOrder[i].uid}">${JdOrder[i].uid}</a></td>
+                                                                    <td><a href="javascript:void(0);" onclick="addmessage(${oid[i]})">${oid[i]}</a></td>
                                                                     <td>${JdOrder[i].address}</td>
                                                                     <td>${JdOrder[i].message}</td>
                                                                     <c:if test="${JdOrder[i].state==0}">
@@ -300,8 +313,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                     </div>
+                <div class="row">
+                    <c:if test="${JdMessage!=null}">
+                        <c:forEach var="i" begin="0" end="${JdMessage.size()-1}" step="1">
+                            <div class="col-md-4 col-sm-4">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        商家:${JdMessage[i].stoid}
+                                    </div>
+                                    <div class="panel-body">
+                                        <p>商家信息：${JdMessage[i].message}</p>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <a href="javascript:void(0);" onclick="change(${JdMessage[i].mid},${JdMessage[i].stoid})">回复</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:if>
+                </div>
                 </div>
             </div>
+            <form action="/Jd/messageUI" method="post">
+                <input type="hidden" name="uid" value="${sessionScope.JdUser.uid}">
+                <input type="hidden" name="stoid" value="">
+                <input type="hidden" name="mid" value="">
+                <div class="form-group">
+                    <label><h4 id="message">联系商家：</h4></label>
+                <textarea class="form-control" name="message" rows="3"></textarea>
+                <br>
+                <center><input  type="submit" class="btn btn-info btn-lg" value="确定" /></center>
+                </div>
+            </form>
             <!-- /. ROW  -->
 
 

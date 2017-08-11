@@ -37,6 +37,8 @@ public class  UserServiceImpl implements UserService{
     private JdOrderProdsMapper jdOrderProdsMapper;
     @Autowired
     private JdSizesMapper jdSizesMapper;
+    @Autowired
+    private JdMessageMapper jdMessageMapper;
     public int findUser(String username,String pass) throws Exception{
         JdUser jdUser = new JdUser();
         jdUser.setName(username);
@@ -215,6 +217,31 @@ public class  UserServiceImpl implements UserService{
     @Override
     public void updateJdSizes(JdSizes jdSizes) throws Exception {
         jdSizesMapper.updateByPrimaryKeySelective(jdSizes);
+    }
+
+    @Override
+    public List<JdOrder> selectJdOrderUser(int uid)throws Exception{
+        return jdOrderStoresMapper.selectJdOrder_User(uid);
+    }
+
+    @Override
+    public int selectStoid(int oid) throws Exception {
+        return jdOrderStoresMapper.selectStoid(oid);
+    }
+
+    @Override
+    public void insertMessage(JdMessage jdMessage) throws Exception {
+        jdMessageMapper.insert(jdMessage);
+    }
+
+    @Override
+    public List<JdMessage> selectMessage2(int uid) throws Exception {
+        return jdMessageMapper.selectMessage2(uid);
+    }
+
+    @Override
+    public List<JdProds> selectJdProd2(String brand) throws Exception {
+        return jdProdsMapper.selectJdProds_brand(brand);
     }
 
 

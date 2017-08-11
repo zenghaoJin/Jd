@@ -74,9 +74,6 @@
                     <input type="password" class="form-control" id="pass" name="pass" placeholder="密码" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <label for="remember"><input type="checkbox" id="remember"> 记住密码</label>
-                </div>
-                <div class="form-group">
                     <p>没有注册? <a href="sign_up" ><font color="red">注册</font></a> | <a href="forget"><font color="red">忘记密码?</font></a></p>
                 </div>
                 <div class="form-group">

@@ -213,7 +213,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </c:if>
                 <c:if test="${sessionScope.JdUser!=null}">
                     <a href="/Jd/cart?uid=${sessionScope.JdUser.uid}&cid=${sessionScope.cid==null?0:sessionScope.cid}"><h3 id="cart"></h3></a>
-                    <p><a href="javascript:;" class="simpleCart_empty">空购物车</a></p>
+                    <p><a href="/Jd/message?uid=${sessionScope.JdUser.uid}" class="simpleCart_empty">查看订单</a></p>
                 </c:if>
             </div>
         </div>
@@ -392,10 +392,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <h4>品牌</h4>
                 <div class="row row1 scroll-pane">
                     <div class="col col-4">
-                        <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Roadstar</label>
+                        <label class="checkbox"><a href="/Jd/select2?brand=1">Nike</a></label>
                     </div>
                     <div class="col col-4">
-                        <label class="checkbox"><input type="radio" name="checkbox"><i></i>Puma</label>
+                        <label class="checkbox"><a href="/Jd/select2?brand=2">阿迪达斯</a></label>
+                    </div>
+                    <div class="col col-4">
+                        <label class="checkbox"><a href="/Jd/select2?brand=3">特步</a></label>
                     </div>
                 </div>
             </section>

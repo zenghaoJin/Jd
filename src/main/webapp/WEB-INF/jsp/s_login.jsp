@@ -49,11 +49,6 @@
                             <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
                             <input type="password" class="form-control" name="pass" placeholder="密码" />
                         </div>
-                        <div class="form-group">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" /> 记住密码
-                            </label>
-                        </div>
                         <input type="submit" value="登录" class="btn btn-primary">
                     </form>
                 </div>

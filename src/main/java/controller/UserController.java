@@ -2,6 +2,7 @@ package controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import net.sf.json.JSONObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import service.ProdsService;
 import service.UserService;
 import tool.EmailCheck;
 import tool.Forget;
+import tool.PhoneCheck;
 import tool.actiCode;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +36,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @RequestMapping("/message")
-    public String message(String uid,String stoid,Model model)throws Exception{
+    public String message(int uid,Model model)throws Exception{
         //分类
         List<JdMclass> s1 = userService.selectJdMclass();
         List<JdTwoclass> s2 = userService.selectJdTwoclass();
@@ -42,8 +44,48 @@ public class UserController {
         model.addAttribute("JdMclass", s1);
         model.addAttribute("JdTwoclass", s2);
         model.addAttribute("JdThreeclass", s3);
-
+        List<JdOrder> s4 = userService.selectJdOrderUser(uid);
+        List<JdSizes> s5 = new ArrayList<>();
+        int[] s6 = new int[s4.size()];
+        for(int i=0;i<s4.size();i++){
+            s5.add(prodsService.selectJdSizes(s4.get(i).getSizeid()));
+        }
+        for(int i=0;i<s4.size();i++){
+            s6[i] = userService.selectStoid(s4.get(i).getOid());
+        }
+        List<JdMessage> s7 = userService.selectMessage2(uid);
+        model.addAttribute("JdMessage",s7);
+        model.addAttribute("oid",s6);
+        model.addAttribute("Sizes",s5);
+        model.addAttribute("JdOrder",s4);
         return "/message";
+    }
+    @RequestMapping("/messageUI")
+    public String messageUI(int mid,int uid,int stoid,String message,Model model)throws Exception{
+        List<JdMclass> s4 = userService.selectJdMclass();
+        List<JdTwoclass> s5 = userService.selectJdTwoclass();
+        List<JdThreeclass> s6 = userService.selectJdThreeclass();
+        model.addAttribute("JdMclass", s4);
+        model.addAttribute("JdTwoclass", s5);
+        model.addAttribute("JdThreeclass", s6);
+        if(mid==0){
+        JdMessage s1 = new JdMessage();
+        s1.setMessage(message);
+        s1.setUid(uid);
+        s1.setStoid(stoid);
+        s1.setState("0");
+        userService.insertMessage(s1);
+        }else{
+            JdMessage s2 = new JdMessage();
+            s2.setMid(mid);
+            s2.setState("1");
+            JdMessage s1 = new JdMessage();
+            s1.setMessage(message);
+            s1.setUid(uid);
+            s1.setStoid(stoid);
+            s1.setState("0");
+        }
+        return "prod";
     }
     @RequestMapping("/OrderUI")
     public String OrderUI(String uid,float zprice,int[] num,String[] pimgid,int[] sizeid,int[] proid,
@@ -247,6 +289,36 @@ public class UserController {
             response.getWriter().print(json.toString());
         }
     }
+    @RequestMapping("/select2")
+    public String select2(String brand,Model model) throws Exception {
+        List<JdMclass> s1 = userService.selectJdMclass();
+        List<JdTwoclass> s2 = userService.selectJdTwoclass();
+        List<JdThreeclass> s3 = userService.selectJdThreeclass();
+        model.addAttribute("JdMclass", s1);
+        model.addAttribute("JdTwoclass", s2);
+        model.addAttribute("JdThreeclass", s3);
+        if(brand=="1"){
+            brand = "Nike";
+        }else if(brand=="2"){
+            brand = "阿迪达斯";
+        }else{
+            brand = "特步";
+        }
+        PageHelper.startPage(1, 6);
+        List<JdProds> prods = userService.selectJdProd2(brand);
+        PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(prods);
+        int total = (int) ((pageInfo.getTotal()-1)/6)+1;
+        //款式图
+        List<JdProdimg> s5 = new ArrayList<>();
+        for(int i=0;i<prods.size();i++){
+            s5.addAll(userService.selectJdProdimg(prods.get(i).getProid()+""));
+        }
+        model.addAttribute("Img",s5);
+        model.addAttribute("prods",prods);
+        model.addAttribute("total",total);
+        model.addAttribute("page","1");
+        return "select";
+    }
     @RequestMapping("/select")
     public String select(String tid,String mid,String thid,Model model) throws Exception {
             //分类
@@ -417,6 +489,15 @@ public class UserController {
         model.addAttribute("JdMclass",s1);
         model.addAttribute("JdTwoclass",s2);
         model.addAttribute("JdThreeclass",s3);
+
+        List<JdProds> prods = userService.selectJdProds();
+        //款式图
+        List<JdProdimg> s5 = new ArrayList<>();
+        for(int i=0;i<prods.size();i++){
+            s5.addAll(userService.selectJdProdimg(prods.get(i).getProid()+""));
+        }
+        model.addAttribute("Img",s5);
+        model.addAttribute("prods",prods);
         return "prod";
     }
     @RequestMapping("/login")
@@ -507,10 +588,11 @@ public class UserController {
         response.getWriter().print(result);
     }
     @RequestMapping("/num")
-    public void num(HttpServletResponse response,HttpSession session)throws Exception{
+    public void num(String phonenum,HttpServletResponse response,HttpSession session)throws Exception{
         actiCode actiCode = new actiCode();
         String x = actiCode.number();
-        System.out.print(x);
+        PhoneCheck s1 = new PhoneCheck();
+        s1.phone(phonenum,x);
         response.setCharacterEncoding("UTF-8");
         response.getWriter().print( "{\"pnum\":\""+x+"\"}");
     }

@@ -294,4 +294,7 @@
   <select id="selectOJdProdimg" resultType="po.JdProdimg" >
     select * from jd_prodimg WHERE pimgid =#{pimgid}
   </select>
+  <select id="selectJdProds_brand" resultType="po.JdProds" >
+    select * from jd_prods WHERE brand =#{brand}
+  </select>
 </mapper>

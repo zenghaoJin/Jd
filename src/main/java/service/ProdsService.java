@@ -30,4 +30,7 @@ public interface ProdsService {
     List<JdOrder> selectJdOrder(String stoid)throws Exception;
     void updateJdOrder_state(JdOrder jdOrder)throws Exception;
     JdSizes selectJdSizes(int sizeid)throws Exception;
+    List<JdMessage> selectMessage(int stoid)throws Exception;
+    void updateMessage(JdMessage jdMessage)throws Exception;
+    void insertMessage(JdMessage jdMessage)throws Exception;
 }

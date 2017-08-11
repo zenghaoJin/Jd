@@ -38,6 +38,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     $("#cart").text("购物车:("+prodsnum+"件商品)").append("<img src='images/cart.png' alt=''/>");
                 })}
         });
+        function Changeimg(x,v) {
+            $(v).parent().parent().prev().find("img").attr("src",x);
+        }
     </script>
 
 </head>
@@ -67,7 +70,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <a href="/Jd/cart?uid=${sessionScope.JdUser.uid}&cid=${sessionScope.cid==null?0:sessionScope.cid}">
                         <h3 id="cart"></h3>
                     </a>
-                    <p><a href="javascript:;" class="simpleCart_empty">空购物车</a></p>
+                    <p><a href="/Jd/message?uid=${sessionScope.JdUser.uid}" class="simpleCart_empty">查看订单</a></p>
                 </c:if>
             </div>
 
@@ -117,15 +120,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--品牌-->
 <div class="categoires">
     <div class="container">
-        <a href="#"><div class="col-md-4 sections fashion-grid-a">
+        <a href="/Jd/select2?brand=1"><div class="col-md-4 sections fashion-grid-a">
             <h4>Nike</h4>
             <p>dignissim</p>
         </div></a>
-        <a href="#"><div class="col-md-4 sections fashion-grid-b">
+        <a href="/Jd/select2?brand=2"><div class="col-md-4 sections fashion-grid-b">
             <h4>阿迪达斯</h4>
             <p>fermentum</p>
         </div></a>
-        <a href="#"><div class="col-md-4 sections fashion-grid-c">
+        <a href="/Jd/select2?brand=3"><div class="col-md-4 sections fashion-grid-c">
             <h4>特步</h4>
             <p>vulputate</p>
         </div></a>
@@ -143,80 +146,117 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"> </div>
             <!-- 			<div class="more-product-info"><span>NEW</span></div>右上角新品	 -->
             <div class="tab-grids">
-                <div id="tab1" class="tab-grid1">
-                    <!--表单一-->
-                    <div class="product-grid">
-                        <a href="single.html">
-                            <div class="more-product-info">
-                                <div class="more-product-info"></div>
-                            </div>
-                            <div class="product-img b-link-stripe b-animate-go  thickbox">
-                                <img src="images/bs2.jpg" class="img-responsive" alt=""/>
-                                <div class="b-wrapper">
-                                    <h4 class="b-animate b-from-left  b-delay03">
-                                        <button class="btns">ORDER NOW</button>
-                                    </h4>
+                    <div id="tab1" class="tab-grid1">
+                        <c:if test="${prods!=null}">
+                            <c:set var="num" value="1"></c:set>
+                            <c:forEach items="${prods}" var="prods">
+                            <c:if test="${prods.thid==2&&num!=4}">
+                                <c:set var="num" value="${num+1}"></c:set>
+                                <div class="product-grid">
+                                    <a href="/Jd/selectP?proid=${prods.proid}">
+                                        <div class="more-product-info">
+                                            <div class="more-product-info"></div>
+                                        </div>
+                                        <div class="product-img b-link-stripe b-animate-go  thickbox">
+                                            <img src="${pageContext.request.contextPath}/upload/${prods.zimg}" class="img-responsive" alt=""/>
+                                            <div class="b-wrapper">
+                                                <h4 class="b-animate b-from-left  b-delay03">
+                                                    <button class="btns">查看商品</button>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="product-info simpleCart_shelfItem">
+                                        <div class="product-info-cust prt_name">
+                                            <c:forEach items="${Img}" var="imgs">
+                                                <c:if test="${prods.proid==imgs.proid}">
+                                                    <img src="${pageContext.request.contextPath}/upload/${imgs.img}"  onmousemove="Changeimg($(this).attr('src'),this)" height="40" width="40" />
+                                                </c:if>
+                                            </c:forEach>
+                                            <h4>${prods.name}</h4>
+                                            <span class="item_price">￥：${prods.price}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                        <div class="product-info simpleCart_shelfItem">
-                            <div class="product-info-cust prt_name">
-                                <img src="images/bs2.jpg"  height="40" width="40" />
-                                <h4>名字</h4>
-                                <span class="item_price">￥：钱元</span>
-                            </div>
-                        </div>
-                    </div>
-
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
                 </div>
 
                 <!--表单二-->
                 <div id="tab2" class="tab-grid2">
-                    <div class="product-grid">
-                        <a href="single.html">
-                        <div class="more-product-info"></div>
-                        <div class="product-img b-link-stripe b-animate-go  thickbox">
-                            <img src="images/bs2.jpg" class="img-responsive" alt=""/>
-                            <div class="b-wrapper">
-                                <h4 class="b-animate b-from-left  b-delay03">
-                                    <button class="btns">ORDER NOW</button>
-                                </h4>
-                            </div>
-                        </div>
-                        </a>
-                        <div class="product-info simpleCart_shelfItem">
-                            <div class="product-info-cust prt_name">
-                                <img src="images/bs2.jpg"  height="40" width="40" />
-                                <br>
-                                <h4>名字</h4>
-                                <span class="item_price">￥：钱元</span>
-                            </div>
-                        </div>
-                    </div>
+                    <c:if test="${prods!=null}">
+                        <c:set var="num2" value="1"></c:set>
+                        <c:forEach items="${prods}" var="prods">
+                            <c:if test="${prods.thid==3&&num2!=4}">
+                                <c:set var="num2" value="${num2+1}"></c:set>
+                                <div class="product-grid">
+                                    <a href="/Jd/selectP?proid=${prods.proid}">
+                                        <div class="more-product-info">
+                                            <div class="more-product-info"></div>
+                                        </div>
+                                        <div class="product-img b-link-stripe b-animate-go  thickbox">
+                                            <img src="${pageContext.request.contextPath}/upload/${prods.zimg}" class="img-responsive" alt=""/>
+                                            <div class="b-wrapper">
+                                                <h4 class="b-animate b-from-left  b-delay03">
+                                                    <button class="btns">查看商品</button>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="product-info simpleCart_shelfItem">
+                                        <div class="product-info-cust prt_name">
+                                            <c:forEach items="${Img}" var="imgs">
+                                                <c:if test="${prods.proid==imgs.proid}">
+                                                    <img src="${pageContext.request.contextPath}/upload/${imgs.img}"  onmousemove="Changeimg($(this).attr('src'),this)" height="40" width="40" />
+                                                </c:if>
+                                            </c:forEach>
+                                            <h4>${prods.name}</h4>
+                                            <span class="item_price">￥：${prods.price}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
                 </div>
 
                 <!--表单三-->
                 <div id="tab3" class="tab-grid3">
-                    <div class="product-grid">
-                        <a href="single.html">
-                        <div class="more-product-info"><span>NEW</span></div>
-                        <div class="product-img b-link-stripe b-animate-go  thickbox">
-                            <img src="images/bs2.jpg" class="img-responsive" alt=""/>
-                            <div class="b-wrapper">
-                                <h4 class="b-animate b-from-left  b-delay03">
-                                    <button class="btns">ORDER NOW</button>
-                                </h4>
-                            </div>
-                        </div>
-                        </a>
-                        <div class="product-info simpleCart_shelfItem">
-                            <div class="product-info-cust prt_name">
-                                <img src="images/bs2.jpg"  height="40" width="40" />
-                                <h4>名字</h4>
-                                <span class="item_price">￥：钱元</span>
-                            </div>
-                        </div>
-                    </div>
+                    <c:if test="${prods!=null}">
+                        <c:set var="num3" value="1"></c:set>
+                        <c:forEach items="${prods}" var="prods">
+                            <c:if test="${prods.thid==4&&num!=4}">
+                                <c:set var="num3" value="${num3+1}"></c:set>
+                                <div class="product-grid">
+                                    <a href="/Jd/selectP?proid=${prods.proid}">
+                                        <div class="more-product-info">
+                                            <div class="more-product-info"></div>
+                                        </div>
+                                        <div class="product-img b-link-stripe b-animate-go  thickbox">
+                                            <img src="${pageContext.request.contextPath}/upload/${prods.zimg}" class="img-responsive" alt=""/>
+                                            <div class="b-wrapper">
+                                                <h4 class="b-animate b-from-left  b-delay03">
+                                                    <button class="btns">查看商品</button>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="product-info simpleCart_shelfItem">
+                                        <div class="product-info-cust prt_name">
+                                            <c:forEach items="${Img}" var="imgs">
+                                                <c:if test="${prods.proid==imgs.proid}">
+                                                    <img src="${pageContext.request.contextPath}/upload/${imgs.img}"  onmousemove="Changeimg($(this).attr('src'),this)" height="40" width="40" />
+                                                </c:if>
+                                            </c:forEach>
+                                            <h4>${prods.name}</h4>
+                                            <span class="item_price">￥：${prods.price}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
                 </div>
 
             </div>
@@ -225,6 +265,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!-- Comman-js-files -->
         <script>
             $(document).ready(function() {
+                $("#tab1").hide();
                 $("#tab2").hide();
                 $("#tab3").hide();
                 $(".tabs-menu a").click(function(event){

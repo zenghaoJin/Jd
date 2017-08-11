@@ -32,13 +32,24 @@ public class ProdsController {
     @Autowired
     private ProdsService prodsService;
     @RequestMapping("/s_message")
-    public String s_message(String uid,String stoid,Model model)throws Exception{
-
+    public String s_message(int stoid,Model model)throws Exception{
+        List<JdMessage> s1 = prodsService.selectMessage(stoid);
+        model.addAttribute("JdMessage",s1);
+        model.addAttribute("stoid",stoid);
         return "/s_message";
     }
     @RequestMapping("/s_messageUI")
-    public String s_messageUI(String uid,String stoid,Model model)throws Exception{
-
+    public String s_messageUI(int uid,int stoid,int mid,String message,Model model)throws Exception{
+        JdMessage s2 = new JdMessage();
+        s2.setMid(mid);
+        s2.setState("1");
+        prodsService.updateMessage(s2);
+        JdMessage s1 = new JdMessage();
+        s1.setMessage(message);
+        s1.setUid(uid);
+        s1.setStoid(stoid);
+        s1.setState("0");
+        prodsService.insertMessage(s1);
         return "/s_message";
     }
     @RequestMapping("/updateJdOrder_state")

@@ -82,7 +82,7 @@
         <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn-danger square-btn-adjust">注销</a> </div>
+font-size: 16px;"><a href="/Jd/out" class="btn btn-danger square-btn-adjust">注销</a> </div>
     </nav>
     <!-- /. NAV TOP  -->
     <nav class="navbar-default navbar-side" role="navigation">
@@ -91,20 +91,11 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
                 <li class="text-center">
                     <img src="assets/img/find_user.png" class="user-image img-responsive"/>
                 </li>
-                <li>
-                    <a  href="index.html"><i class="fa fa-dashboard fa-3x"></i> 款式一</a>
-                </li>
-                <li>
-                    <a  href="ui.html"><i class="fa fa-desktop fa-3x"></i> 款式二</a>
-                </li>
-                <li>
-                    <a  href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> 款式三</a>
+                <li  >
+                    <a  href="/Jd/s_message?stoid=${sessionScope.jdStores.stoid}"><i class="fa fa-table fa-3x"></i>信息回复</a>
                 </li>
                 <li  >
-                    <a  href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> 款式四</a>
-                </li>
-                <li  >
-                    <a  href="/Jd/s_table?stoid=${sessionScope.jdStores.stoid}"><i class="fa fa-table fa-3x"></i>订单明细</a>
+                    <a class="active-menu" href="/Jd/s_table?stoid=${sessionScope.jdStores.stoid}"><i class="fa fa-table fa-3x"></i>订单明细</a>
                 </li>
                 <li  >
                     <a  href="/Jd/s_select?stoid=${sessionScope.jdStores.stoid}"><i class="fa fa-edit fa-3x"></i> 查看自己的商品 </a>
@@ -151,7 +142,7 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
                                         <c:forEach var="i" begin="0" end="${JdOrder.size()-1}" step="1">
                                                 <c:if test="${(i+1)%6==1}">
                                                     <tr class="success">
-                                                        <td><a href="${JdOrder[i].uid}">${JdOrder[i].uid}</a></td>
+                                                        <td><a href="/Jd/s_message?stoid=${sessionScope.jdStores.stoid}">${JdOrder[i].uid}</a></td>
                                                         <td>${JdOrder[i].address}</td>
                                                         <td>${JdOrder[i].message}</td>
                                                         <c:if test="${JdOrder[i].state==0}">
@@ -173,7 +164,7 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
                                                 </c:if>
                                             <c:if test="${(i+1)%6==2}">
                                                 <tr class="info">
-                                                    <td><a href="${JdOrder[i].uid}">${JdOrder[i].uid}</a></td>
+                                                    <td><a href="/Jd/s_message?stoid=${sessionScope.jdStores.stoid}">${JdOrder[i].uid}</a></td>
                                                     <td>${JdOrder[i].address}</td>
                                                     <td>${JdOrder[i].message}</td>
                                                     <c:if test="${JdOrder[i].state==0}">
@@ -195,7 +186,7 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
                                             </c:if>
                                             <c:if test="${(i+1)%6==3}">
                                                 <tr class="warning">
-                                                    <td><a href="${JdOrder[i].uid}">${JdOrder[i].uid}</a></td>
+                                                    <td><a href="/Jd/s_message?stoid=${sessionScope.jdStores.stoid}">${JdOrder[i].uid}</a></td>
                                                     <td>${JdOrder[i].address}</td>
                                                     <td>${JdOrder[i].message}</td>
                                                     <c:if test="${JdOrder[i].state==0}">
@@ -217,7 +208,7 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
                                             </c:if>
                                             <c:if test="${(i+1)%6==4}">
                                                 <tr class="danger">
-                                                    <td><a href="${JdOrder[i].uid}">${JdOrder[i].uid}</a></td>
+                                                    <td><a href="/Jd/s_message?stoid=${sessionScope.jdStores.stoid}">${JdOrder[i].uid}</a></td>
                                                     <td>${JdOrder[i].address}</td>
                                                     <td>${JdOrder[i].message}</td>
                                                     <c:if test="${JdOrder[i].state==0}">
@@ -239,7 +230,7 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
                                             </c:if>
                                             <c:if test="${(i+1)%6==5}">
                                                 <tr class="success">
-                                                    <td><a href="${JdOrder[i].uid}">${JdOrder[i].uid}</a></td>
+                                                    <td><a href="/Jd/s_message?stoid=${sessionScope.jdStores.stoid}">${JdOrder[i].uid}</a></td>
                                                     <td>${JdOrder[i].address}</td>
                                                     <td>${JdOrder[i].message}</td>
                                                     <c:if test="${JdOrder[i].state==0}">
@@ -261,7 +252,7 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
                                             </c:if>
                                             <c:if test="${(i+1)%6==0}">
                                                 <tr class="info">
-                                                    <td><a href="${JdOrder[i].uid}">${JdOrder[i].uid}</a></td>
+                                                    <td><a href="/Jd/s_message?stoid=${sessionScope.jdStores.stoid}">${JdOrder[i].uid}</a></td>
                                                     <td>${JdOrder[i].address}</td>
                                                     <td>${JdOrder[i].message}</td>
                                                     <c:if test="${JdOrder[i].state==0}">

@@ -46,4 +46,9 @@ public interface UserService {
     void intsertJdOrderProds(JdOrderProdsKey jdOrderProdsKey)throws Exception;
     void intsertJdOrderStores(JdOrderStoresKey jdOrderStoresKey)throws Exception;
     void updateJdSizes(JdSizes jdSizes)throws Exception;
+    List<JdOrder> selectJdOrderUser(int uid)throws Exception;
+    int selectStoid(int oid)throws Exception;
+    void insertMessage(JdMessage jdMessage)throws Exception;
+    List<JdMessage> selectMessage2(int uid)throws Exception;
+    List<JdProds> selectJdProd2(String  brand)throws Exception;
 }

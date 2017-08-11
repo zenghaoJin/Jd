@@ -209,14 +209,14 @@
             });
             $('#num').click(function() {
                 var url = "${pageContext.request.contextPath}/num";
-                var args = {"time":new Date()};
                 var val5 = $(":input[name='phonenumber']").val();
                 val5 = $.trim(val5);
+                var args = {"phonenum":val5,"time":new Date()};
                 var str5 = /^1[34578]\d{9}$/ ;
                 if(str5.test(val5)){
                 $.getJSON(url,args,function (date) {
                     $("#acticode").val(date.pnum);
-                    alert(date.pnum);
+//                    alert("验证码提示："+date.pnum);
                 })
                 }else{
                     $("#phoneInfo ").show();

@@ -27,4 +27,8 @@ public interface JdMessageMapper {
     int updateByPrimaryKeySelective(JdMessage record);
 
     int updateByPrimaryKey(JdMessage record);
+
+    List<JdMessage> selectMessage(int stoid);
+
+    List<JdMessage> selectMessage2(int uid);
 }
