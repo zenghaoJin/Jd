@@ -297,9 +297,9 @@ public class UserController {
         model.addAttribute("JdMclass", s1);
         model.addAttribute("JdTwoclass", s2);
         model.addAttribute("JdThreeclass", s3);
-        if(brand=="1"){
+        if(brand.equals("1")){
             brand = "Nike";
-        }else if(brand=="2"){
+        }else if(brand.equals("2")){
             brand = "阿迪达斯";
         }else{
             brand = "特步";
