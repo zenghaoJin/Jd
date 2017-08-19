@@ -216,7 +216,8 @@
                 if(str5.test(val5)){
                 $.getJSON(url,args,function (date) {
                     $("#acticode").val(date.pnum);
-//                    alert("验证码提示："+date.pnum);
+                    get_code_time();
+                    alert("验证码提示："+date.pnum);
                 })
                 }else{
                     $("#phoneInfo ").show();
@@ -225,6 +226,22 @@
                 }
             })
             })
+        var wait = 120;
+        function get_code_time(){
+            if(wait==0){
+                $("#num").removeAttr("disabled");
+                $('#num').find("img").show();
+                $('#num').find("input").remove();
+                wait = 120;
+            }else{
+                $("#num").attr("disabled", true);
+                $('#num').find("img").hide();
+                $("#updateverify").show();
+                $("#updateverify").val("剩(" + wait + ")秒");
+                wait--;
+                setTimeout("get_code_time()", 1000);
+            }
+        }
     </script>
 </head>
 <body class="style-2">
@@ -249,6 +266,13 @@
                     <c:forEach items="${message}" var="error">
                         ${error.defaultMessage}<br>
                     </c:forEach> </div>
+                </div>
+                </c:if>
+                <c:if test="${message2!=null}">
+                <div class="form-group">
+                    <div class="alert alert-success" role="alert" >
+                        ${message2}
+                    </div>
                 </div>
                 </c:if>
                 <div class="form-group">
@@ -283,11 +307,15 @@
                     </div>
                 </div>
 
-                <a href="javascript:void(0)" id="num"><img src= "images/2.png" width= "80" height= "30"></a>
+                <button id="num" type="button">
+                    <img src= "images/2.png" width= "80" height= "30">
+                    <input id='updateverify' type='text' readonly style='display: none;background:transparent;border:0;'>
+                </button>
+
                     <input type="hidden" id="acticode" name="acticode" value="${jdUser.acticode}">
 
                 <div class="form-group">
-                    <input type="text" class="form-control" id="pnum" name="pnum" placeholder="手机验证码" autocomplete="off" value="${pnum}">
+                    <input type="text" class="form-control" id="pnum" name="pnum" placeholder="手机验证码" autocomplete="off">
                     <div id="pnumInfo" style="display: none">
                         <img src="images/sign_up2.png" width="18" height="18" border="0">
                         <input type="text" readonly style="width:250px;background:transparent;border:0;">

@@ -540,7 +540,12 @@ public class UserController {
         }
     }
     @RequestMapping("/sign_upUI")
-    public String sign_upUI(@Validated JdUser jdUser, BindingResult bindingResult, Model model,String pnum)throws Exception {
+    public String sign_upUI(HttpSession session, @Validated JdUser jdUser, BindingResult bindingResult, Model model)throws Exception {
+        System.out.println("-------------------------------"+session.getAttribute("pnum"));
+        String pnum = "";
+        if(session.getAttribute("pnum")!=null){
+            pnum = ""+session.getAttribute("pnum");
+        }
         if(bindingResult.hasErrors()){
             List<ObjectError> allErrors = bindingResult.getAllErrors();
             for(ObjectError objectError:allErrors){
@@ -558,7 +563,7 @@ public class UserController {
             EmailCheck emailCheck = new EmailCheck();
             emailCheck.message(jdUser.getEmail(),jdUser.getName(),jdUser.getActicode());
         }else{
-            model.addAttribute("message","验证码不正确或已过期，请重新获取");
+            model.addAttribute("message2","验证码已过期，请重新获取");
             model.addAttribute("jdUser",jdUser);
             model.addAttribute("pnum",pnum);
             return "forward:sign_up";
@@ -593,8 +598,10 @@ public class UserController {
     public void num(String phonenum,HttpServletResponse response,HttpSession session)throws Exception{
         actiCode actiCode = new actiCode();
         String x = actiCode.number();
-        PhoneCheck s1 = new PhoneCheck();
-        s1.phone(phonenum,x);
+        session.setAttribute("pnum", x);
+        session.setMaxInactiveInterval(2*60);
+//        PhoneCheck s1 = new PhoneCheck();
+//        s1.phone(phonenum,x);
         response.setCharacterEncoding("UTF-8");
         response.getWriter().print( "{\"pnum\":\""+x+"\"}");
     }

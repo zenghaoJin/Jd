@@ -2,10 +2,15 @@ package controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
+
+import javafx.scene.control.Cell;
 import net.sf.json.JSONObject;
-import org.apache.ibatis.reflection.SystemMetaObject;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.nutz.json.Json;
+
+
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +28,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.*;
+
+
+import org.apache.poi.ss.usermodel.Row;
 
 /**
  * Created by 曾浩津 on 2017/7/29.
@@ -80,7 +88,7 @@ public class ProdsController {
         return "s_update";
     }
     @RequestMapping("/s_updateUI")
-    public String s_updateUI(HttpServletRequest request,@Validated JdStores jdStores,BindingResult bindingResult,Model model) throws Exception {
+    public String s_updateUI(@Validated JdStores jdStores,BindingResult bindingResult,HttpServletRequest request,Model model) throws Exception {
         if(bindingResult.hasErrors()){
             List<ObjectError> allErrors = bindingResult.getAllErrors();
             for(ObjectError objectError:allErrors){
@@ -552,14 +560,31 @@ public class ProdsController {
     }
 
     @RequestMapping("/text")
-    public String test(){
-//        model.addAttribute("length",length);
+    public String test()throws Exception{
         return "text";
     }
     @RequestMapping("/textUI")
-    public String textUI(String message,Model model) throws Exception {
-        System.out.println("----------------------------"+message);
-        model.addAttribute("message",message);
+    public String textUI( HttpServletRequest request,
+                          @RequestParam("xls")MultipartFile xls,Model model) throws Exception {
+//        String path = request.getServletContext().getRealPath("/upload");//图片路径
+//        String fileName = xls.getOriginalFilename();
+//        File targetFile=new File(path,fileName);
+//        xls.transferTo(targetFile);
+        InputStream is = xls.getInputStream(); //创建工作空间
+        Workbook wb = WorkbookFactory.create(is);
+        Sheet sheet = wb.getSheetAt(0);//获取第一个工作表
+        Row row ;//工作行
+        org.apache.poi.ss.usermodel.Cell cell ;//工作单元格
+        for(int i=0;i<=sheet.getLastRowNum();i++){
+            //sheet.getLastRowNum()获取行数
+            row= sheet.getRow(i);
+            //row.getLastCellNum()获取第i行的列数
+            for (int j=0;j<row.getLastCellNum();j++){
+            cell= row.getCell(j);
+            String str = cell.toString();
+            System.out.println("--------------------------------"+str);
+            }
+        }
         return "text";
     }
 //    @RequestMapping("/s_selectImg")

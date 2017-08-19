@@ -31,7 +31,12 @@
 	实际开发时使用mvc:annotation-driven
 	 -->
 	<mvc:annotation-driven validator="validator"></mvc:annotation-driven>
+
+	<!--用于处理web项目的静态文件，为了加载静态文件-->
 	<mvc:default-servlet-handler></mvc:default-servlet-handler>
+
+
+	<!--&lt;!&ndash;拦截器&ndash;&gt;-->
 	<!--<mvc:interceptors>-->
 		<!--&lt;!&ndash; 多个拦截器，顺序执行 &ndash;&gt;-->
 		<!--<mvc:interceptor>-->
@@ -39,6 +44,8 @@
 			<!--<bean class="tool.LoginInterceptor"></bean>-->
 		<!--</mvc:interceptor>-->
 	<!--</mvc:interceptors>-->
+	<!--捕抓异常处理-->
+	<bean class="tool.JdExceptionResolver"></bean>
 	<!-- 校验器 -->
 	<bean id="validator"
 		  class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">

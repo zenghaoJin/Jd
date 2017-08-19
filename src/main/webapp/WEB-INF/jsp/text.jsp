@@ -22,15 +22,10 @@
     <script type="text/javascript" src="scripts/simditor.min.js"></script>
 </head>
 <body>
-<form action="/Jd/textUI">
-<textarea id="editor" name="message" placeholder="Balabala" autofocus></textarea>
+<form action="/Jd/textUI" method="post" enctype="multipart/form-data">
+<%--<input type="text" name="name">--%>
+    <input type="file" name="xls" />
     <input type="submit" value="确定" class="btn btn-primary">
 </form>
-<script>
-    var editor = new Simditor({
-        textarea: $('#editor')
-        //optional options
-    });
-</script>
 </body>
 </html>

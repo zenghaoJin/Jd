@@ -14,7 +14,7 @@
     <meta name="keywords" content="keywords, keyword, seo, google" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>Coffee Break : 404</title>
+    <title>404异常</title>
     <link rel="stylesheet" media="screen" href="_css/style.css" type="text/css" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
     <link rel="icon" type="image/x-icon" href="favicon.png" />
@@ -26,7 +26,7 @@
     <div class="objects">
         <!-- text area -->
         <div class="text-area rotate">
-            <p class="error">${message}</p>
+            <p class="error">404错误</p>
             <p class="details">There was a problem<br /><br />The page you are looking for is not here or moved.</p>
         </div>
         <!-- text area -->

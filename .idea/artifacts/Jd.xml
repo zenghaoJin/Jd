@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="Jd">
+    <output-path>G:/</output-path>
+    <root id="archive" name="Jd.war">
+      <element id="dir-copy" path="$PROJECT_DIR$/target/cybz-1.0-SNAPSHOT" />
+    </root>
+  </artifact>
+</component>
