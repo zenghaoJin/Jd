@@ -11,6 +11,7 @@ import net.sf.json.JSONObject;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +24,12 @@ import org.springframework.web.multipart.MultipartFile;
 import po.*;
 import service.ProdsService;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.security.MessageDigest;
 import java.util.*;
 
 
@@ -564,28 +567,57 @@ public class ProdsController {
         return "text";
     }
     @RequestMapping("/textUI")
-    public String textUI( HttpServletRequest request,
-                          @RequestParam("xls")MultipartFile xls,Model model) throws Exception {
+    public String textUI( HttpServletRequest request,HttpServletResponse response,
+                          String name,String passWord,String checkbox,Model model) throws Exception {
 //        String path = request.getServletContext().getRealPath("/upload");//图片路径
 //        String fileName = xls.getOriginalFilename();
 //        File targetFile=new File(path,fileName);
 //        xls.transferTo(targetFile);
-        InputStream is = xls.getInputStream(); //创建工作空间
-        Workbook wb = WorkbookFactory.create(is);
-        Sheet sheet = wb.getSheetAt(0);//获取第一个工作表
-        Row row ;//工作行
-        org.apache.poi.ss.usermodel.Cell cell ;//工作单元格
-        for(int i=0;i<=sheet.getLastRowNum();i++){
-            //sheet.getLastRowNum()获取行数
-            row= sheet.getRow(i);
-            //row.getLastCellNum()获取第i行的列数
-            for (int j=0;j<row.getLastCellNum();j++){
-            cell= row.getCell(j);
-            String str = cell.toString();
-            System.out.println("--------------------------------"+str);
+//        InputStream is = xls.getInputStream(); //创建工作空间
+//        Workbook wb = WorkbookFactory.create(is);
+//        Sheet sheet = wb.getSheetAt(0);//获取第一个工作表
+//        Row row ;//工作行
+//        org.apache.poi.ss.usermodel.Cell cell ;//工作单元格
+//        for(int i=0;i<=sheet.getLastRowNum();i++){
+//            //sheet.getLastRowNum()获取行数
+//            row= sheet.getRow(i);
+//            //row.getLastCellNum()获取第i行的列数
+//            for (int j=0;j<row.getLastCellNum();j++){
+//            cell= row.getCell(j);
+//            String str = cell.toString();
+//            System.out.println("--------------------------------"+str);
+//            }
+//        }
+        if(checkbox==null) checkbox = "0";
+        if("123".equals(name)&&"123".equals(passWord)){
+//            MessageDigest m = MessageDigest.getInstance("md5");
+//            m.update(passWord.getBytes("UTF8"));
+//            byte s[] = m.digest();
+//            String loginInfo = name+","+s.toString();
+//            System.out.println("--------------------------------"+s.toString());
+            if(checkbox.equals("1")) {
+                Cookie userCookie = new Cookie("loginInfo", name+","+passWord);
+                userCookie.setMaxAge(30 * 24 * 60 * 60);   //存活期为一个月 30*24*60*60
+                userCookie.setPath("/");
+                response.addCookie(userCookie);
+                System.out.println("---------------------------------123");
+            }else{
+                Cookie[] cookies = request.getCookies();
+                System.out.println("---------------------------------"+cookies.length);
+                for(Cookie cookie:cookies){
+                    cookie.setMaxAge(0);
+                    cookie.setPath("/");
+                    response.addCookie(cookie);
+                }
             }
+            return "text";
         }
+        model.addAttribute("message","密码错误");
         return "text";
+    }
+    @RequestMapping("/text2")
+    public void test2()throws Exception{
+
     }
 //    @RequestMapping("/s_selectImg")
 //    public void s_selectImg(HttpServletResponse response,String stoid,Model model) throws Exception {

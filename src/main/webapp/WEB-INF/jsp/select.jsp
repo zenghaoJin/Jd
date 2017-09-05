@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Java
-  Date: 2017/8/6
-  Time: 0:26
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript" src="jq/jquery-1.7.2.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -36,7 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         $(function(){
             if(${sessionScope.cid!=null}){
                 var url = "${pageContext.request.contextPath}/selectProdsnum";
-                var args = {"cid":${sessionScope.cid},"time":new Date()};
+                var args = {"cid":${sessionScope.cid==null?"0":sessionScope.cid},"time":new Date()};
                 $.getJSON(url,args,function (date) {
                     var prodsnum = date.prodsnum;
                     $("#cart").text("购物车:("+prodsnum+"件商品)").append("<img src='images/cart.png' alt=''/>");
@@ -156,7 +149,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         }
                         v = v.children("div").children("div");
                         if(Json.prods[i].proid==Json.Img[j].proid){
-                            v.prepend("<img src='${pageContext.request.contextPath}/upload/"+Json.Img[j].img+"'onmousemove='Changeimg($(this).attr('src'),this)' height='40' width='40' />");
+                            v.prepend("<img src='${pageContext.request.contextPath}/upload/"+Json.Img[j].img
+                                +"' height='40' width='40' />");
+                            $(v.prepend().find("img")).attr("onmousemove","Changeimg($(this).attr('src'),this)")
                         }
                     }
                 }

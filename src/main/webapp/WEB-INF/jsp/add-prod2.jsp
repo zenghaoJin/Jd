@@ -104,9 +104,6 @@ font-size: 16px;"><a href="/Jd/out" class="btn btn-danger square-btn-adjust">注
                 <li class="text-center">
                     <img src="assets/img/find_user.png" class="user-image img-responsive"/>
                 </li>
-                <li class="text-center">
-                    <img src="assets/img/find_user.png" class="user-image img-responsive"/>
-                </li>
                 <li  >
                     <a  href="/Jd/s_message?stoid=${sessionScope.jdStores.stoid}"><i class="fa fa-table fa-3x"></i>信息回复</a>
                 </li>

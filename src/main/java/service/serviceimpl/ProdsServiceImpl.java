@@ -29,8 +29,6 @@ public class ProdsServiceImpl implements ProdsService{
     private JdOrderMapper jdOrderMapper;
     @Autowired
     private JdMessageMapper jdMessageMapper;
-    @Autowired
-    private JdUserMapper jdUserMapper;
     @Override
     public List<JdOrder> selectJdOrder(String stoid) throws Exception {
         return jdOrderStoresMapper.selectJdOrder(stoid);

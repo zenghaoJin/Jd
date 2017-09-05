@@ -88,7 +88,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             }
                             v = v.children("div").children("div");
                             if(Json.prods[i].proid==Json.Img[j].proid){
-                                v.prepend("<img src='${pageContext.request.contextPath}/upload/"+Json.Img[j].img+"'onmousemove='Changeimg($(this).attr('src'),this)' height='40' width='40' />");
+                                v.prepend("<img src='${pageContext.request.contextPath}/upload/"+Json.Img[j].img
+                                    +"' height='40' width='40' />");
+                                $(v.prepend().find("img")).attr("onmousemove","Changeimg($(this).attr('src'),this)")
                             }
                         }
                     }
