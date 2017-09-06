@@ -564,15 +564,11 @@ public class ProdsController {
 
     @RequestMapping("/text")
     public String test()throws Exception{
-        return "text";
+        return "push-pseries";
     }
     @RequestMapping("/textUI")
     public String textUI( HttpServletRequest request,HttpServletResponse response,
                           String name,String passWord,String checkbox,Model model) throws Exception {
-//        String path = request.getServletContext().getRealPath("/upload");//图片路径
-//        String fileName = xls.getOriginalFilename();
-//        File targetFile=new File(path,fileName);
-//        xls.transferTo(targetFile);
 //        InputStream is = xls.getInputStream(); //创建工作空间
 //        Workbook wb = WorkbookFactory.create(is);
 //        Sheet sheet = wb.getSheetAt(0);//获取第一个工作表

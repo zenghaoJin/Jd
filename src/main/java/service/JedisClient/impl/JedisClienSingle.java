@@ -1,5 +1,6 @@
 package service.JedisClient.impl;
 
+import org.springframework.stereotype.Service;
 import service.JedisClient.JedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
@@ -9,6 +10,7 @@ import redis.clients.jedis.JedisPool;
  * redis单机版实现类
  * Created by 曾浩津 on 2017/8/22.
  */
+@Service
 public class JedisClienSingle implements JedisClient {
     @Autowired
     private JedisPool jedisPool;

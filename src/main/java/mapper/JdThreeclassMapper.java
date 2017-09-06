@@ -33,4 +33,6 @@ public interface JdThreeclassMapper {
     List<JdThreeclass> selectJdThreeclass(String  tid)throws Exception;
 
     List<JdThreeclass> selectZjdThreeclass()throws Exception;
+
+    int selectJdThclass_name(String name,int tid)throws Exception;
 }

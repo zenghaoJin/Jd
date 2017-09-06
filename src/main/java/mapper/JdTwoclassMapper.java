@@ -36,4 +36,8 @@ public interface JdTwoclassMapper {
     List<JdTwoclass> selectJdTwoclass(String  mid)throws Exception;
 
     List<JdTwoclass> selectZjdTwoclass() throws Exception;
+
+    int selectJdTwoclass_name2(String name,int mid)throws Exception;
+
+    String selectJdTwoclass_name3(String name,int mid)throws Exception;
 }

@@ -196,29 +196,14 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/outAdmin" class="bt
                 <li class="text-center">
                     <img src="assets/img/find_user.png" class="user-image img-responsive"/>
                 </li>
-                <li>
-                    <a  href="index.html"><i class="fa fa-dashboard fa-3x"></i> 款式一</a>
-                </li>
-                <li>
-                    <a  href="ui.html"><i class="fa fa-desktop fa-3x"></i> 款式二</a>
-                </li>
-                <li>
-                    <a  href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> 款式三</a>
+                <li  >
+                    <a   href="/Jd/update-pseries"><i class="fa fa-laptop fa-3x"></i>修改商品分类</a>
                 </li>
                 <li  >
-                    <a  href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> 款式四</a>
+                    <a class="active-menu"  href="/Jd/add_pseries"><i class="fa fa-square-o fa-3x"></i> 增加商品类别</a>
                 </li>
                 <li  >
-                    <a  href="/Jd/s_table?stoid=${sessionScope.jdStores.stoid}"><i class="fa fa-table fa-3x"></i>订单明细</a>
-                </li>
-                <li  >
-                    <a   href=""><i class="fa fa-edit fa-3x"></i> 查看自己的商品 </a>
-                </li>
-                <li  >
-                    <a   href=""><i class="fa fa-laptop fa-3x"></i>个人信息</a>
-                </li>
-                <li  >
-                    <a  class="active-menu" href="/Jd/addProd"><i class="fa fa-square-o fa-3x"></i> 增加商品页面</a>
+                    <a   href="/Jd/push-pseries"><i class="fa fa-sitemap fa-3x"></i> 更新商品类别</a>
                 </li>
             </ul>
         </div>

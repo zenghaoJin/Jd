@@ -323,6 +323,9 @@ font-size: 16px;"><a href="/Jd/outAdmin" class="btn btn-danger square-btn-adjust
                 <li  >
                     <a class="active-menu"  href="/Jd/add_pseries"><i class="fa fa-square-o fa-3x"></i> 增加商品类别</a>
                 </li>
+                <li  >
+                    <a   href="/Jd/push-pseries"><i class="fa fa-sitemap fa-3x"></i> 更新商品类别</a>
+                </li>
             </ul>
         </div>
     </nav>

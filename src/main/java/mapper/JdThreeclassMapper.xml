@@ -187,4 +187,7 @@
   <select id="selectZjdThreeclass" resultType="po.JdThreeclass" >
     select * from jd_threeclass
   </select>
+  <select id="selectJdThclass_name" resultType="java.lang.Integer" >
+    select count(*) from jd_threeclass WHERE name =#{0} AND tid =#{1}
+  </select>
 </mapper>

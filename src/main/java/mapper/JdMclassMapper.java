@@ -33,4 +33,6 @@ public interface JdMclassMapper {
     List<JdMclass> selectJdMclass()throws Exception;
 
     int selectJdMclass_name(String name)throws Exception;
+
+    String selectJdMclass_name2(String name)throws Exception;
 }

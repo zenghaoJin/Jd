@@ -24,4 +24,5 @@ public interface AdminService {
     public void updateJdMclass(JdMclass jdMclass)throws Exception;
     public void updateJdTwoclass(JdTwoclass jdTwoclass)throws Exception;
     public void updateJdThreeclass(JdThreeclass jdThreeclass)throws Exception;
+    public void saveJdclass(String[] mClass,String[] tClass,String[] thClass)throws Exception;
 }

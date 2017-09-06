@@ -109,7 +109,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         }else if(date.name==null){
                             $("#oneInfo").show();
                             $("#oneInfo input").show();
-                            $("#oneInfo img").attr('src','images/sign_up3.png');
+                            $("#oneInfo img").attr('src','images/sign_up2.png');
                             $("#oneInfo input").val("主类名字不能为空").css("color","#c90011");
                         }else{
                             $("#Zone option").each(function(){
@@ -162,7 +162,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         }else if(date.name==null){
                             $("#twoInfo").show();
                             $("#twoInfo input").show();
-                            $("#twoInfo img").attr('src','images/sign_up3.png');
+                            $("#twoInfo img").attr('src','images/sign_up2.png');
                             $("#twoInfo input").val("子类名字不能为空").css("color","#c90011");
                         }else{
                             $("#Ttwo option").each(function(){
@@ -210,7 +210,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             }else if(date.name==null){
                                 $("#threeInfo").show();
                                 $("#threeInfo input").show();
-                                $("#threeInfo img").attr('src','images/sign_up3.png');
+                                $("#threeInfo img").attr('src','images/sign_up2.png');
                                 $("#threeInfo input").val("子子类名字不能为空").css("color","#c90011");
                             }else{
                                 $("#Thone option").each(function(){
@@ -323,6 +323,9 @@ font-size: 16px;"><a href="/Jd/outAdmin" class="btn btn-danger square-btn-adjust
                 </li>
                 <li  >
                     <a   href="/Jd/add_pseries"><i class="fa fa-square-o fa-3x"></i> 增加商品类别</a>
+                </li>
+                <li  >
+                    <a   href="/Jd/push-pseries"><i class="fa fa-sitemap fa-3x"></i> 更新商品类别</a>
                 </li>
             </ul>
         </div>

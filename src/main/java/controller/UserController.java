@@ -3,6 +3,8 @@ package controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sun.org.apache.bcel.internal.generic.NEW;
+import net.sf.json.JSON;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import po.*;
+import service.JedisClient.JedisClient;
 import service.ProdsService;
 import service.UserService;
 import tool.EmailCheck;
@@ -26,11 +29,15 @@ import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static org.nutz.el.El.eval;
+
 /**
  * Created by 曾浩津 on 2017/7/12.
  */
 @Controller
 public class UserController {
+    @Autowired
+    private JedisClient jedisClient;
     @Autowired
     private ProdsService prodsService;
     @Autowired
@@ -44,6 +51,7 @@ public class UserController {
         model.addAttribute("JdMclass", s1);
         model.addAttribute("JdTwoclass", s2);
         model.addAttribute("JdThreeclass", s3);
+
         List<JdOrder> s4 = userService.selectJdOrderUser(uid);
         List<JdSizes> s5 = new ArrayList<>();
         int[] s6 = new int[s4.size()];
@@ -492,6 +500,21 @@ public class UserController {
         model.addAttribute("JdTwoclass",s2);
         model.addAttribute("JdThreeclass",s3);
 
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        if(s1!=null){
+//            map.put("JdMclass",s1);
+//        }
+//        if(s2!=null){
+//            map.put("JdTwoclass",s2);
+//        }
+//        if(s3!=null){
+//            map.put("JdThreeclass",s3);
+//        }
+//        JSONObject json = JSONObject.fromObject(map);
+//        jedisClient.set("key",json.toString());
+//        String key = jedisClient.get("key");
+//        System.out.println("====================="+key);
+
         List<JdProds> prods = userService.selectJdProds();
         //款式图
         List<JdProdimg> s5 = new ArrayList<>();
@@ -792,4 +815,5 @@ public class UserController {
         response.setCharacterEncoding("UTF-8");
         response.getWriter().print(json.toString());
     }
+
 }

@@ -170,4 +170,7 @@
   <select id="selectJdMclass_name" resultType="java.lang.Integer" >
     select count(*) from jd_mclass WHERE name =#{name }
   </select>
+  <select id="selectJdMclass_name2" resultType="java.lang.String" >
+    select mid from jd_mclass WHERE name =#{name }
+  </select>
 </mapper>

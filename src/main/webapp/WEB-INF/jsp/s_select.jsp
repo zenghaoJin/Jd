@@ -137,7 +137,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn-danger square-btn-adjust">注销</a> </div>
+font-size: 16px;"><a href="/Jd/out" class="btn btn-danger square-btn-adjust">注销</a> </div>
     </nav>
     <!-- /. NAV TOP  -->
     <nav class="navbar-default navbar-side" role="navigation">
@@ -171,9 +171,6 @@ font-size: 16px;"> 时间。。。。。 &nbsp; <a href="/Jd/out" class="btn btn
                 <div class="col-md-12">
                     <h2>浏览商品</h2>
                     <hr />
-                    <!--补充区域-->
-                    补充区域
-                    <!--补充区域-->
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             所有商品信息

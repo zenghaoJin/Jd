@@ -187,4 +187,10 @@
   <select id="selectZjdTwoclass" resultType="po.JdTwoclass" >
     select * from jd_twoclass
   </select>
+  <select id="selectJdTwoclass_name2" resultType="java.lang.Integer" >
+    select count(*) from jd_twoclass WHERE name =#{0} and mid =#{1}
+  </select>
+  <select id="selectJdTwoclass_name3" resultType="java.lang.String" >
+    select tid from jd_twoclass WHERE name =#{0} and mid =#{1}
+  </select>
 </mapper>

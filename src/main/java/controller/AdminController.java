@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
+import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +13,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import po.*;
 import service.AdminService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.InputStream;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +35,45 @@ import java.util.Map;
 public class AdminController {
     @Autowired
     private AdminService adminService;
+
+    @RequestMapping("/push-pseries")
+    public String push_pseries() throws Exception {
+        return "push-pseries";
+    }
+    @RequestMapping("/push_pseriesUI")
+    public String push_pseriesUI(@RequestParam("ex")MultipartFile ex,
+                                 HttpServletRequest request, Model model) throws Exception {
+        InputStream is = ex.getInputStream();
+        Workbook wb = WorkbookFactory.create(is);
+        Sheet sheet = wb.getSheetAt(0);
+        //工作行
+        Row row ;
+        //工作单元格
+        Cell cell ;
+        //sheet.getLastRowNum()获取行数
+        String[] mClass = new String[sheet.getRow(0).getLastCellNum()-1];;
+        String[] tClass = new String[sheet.getRow(1).getLastCellNum()-1];
+        String[] thClass = new String[sheet.getRow(2).getLastCellNum()-1];
+        for(int i=0;i<=sheet.getLastRowNum();i++){
+            row= sheet.getRow(i);
+            //row.getLastCellNum()获取第i行的列数
+            for (int j=1;j<row.getLastCellNum();j++){
+                cell= row.getCell(j);
+                if(i==0){
+                    System.out.println("================1"+cell.toString());
+                    mClass[j-1] =cell.toString();
+                }else if(i==1){
+                    System.out.println("================2"+cell.toString());
+                    tClass[j-1] =cell.toString();
+                }else{
+                    System.out.println("================3"+cell.toString());
+                    thClass[j-1] =cell.toString();
+                }
+            }
+        }
+        adminService.saveJdclass(mClass,tClass,thClass);
+        return "push-pseries";
+    }
     @RequestMapping("/add_pseries")
     public String add_pseries(Model model) throws Exception {
         List<JdMclass> s1 = adminService.selectJdMclass();

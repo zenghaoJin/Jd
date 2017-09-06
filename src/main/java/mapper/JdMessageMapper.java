@@ -31,4 +31,6 @@ public interface JdMessageMapper {
     List<JdMessage> selectMessage(int stoid);
 
     List<JdMessage> selectMessage2(int uid);
+
+
 }

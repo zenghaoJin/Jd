@@ -109,4 +109,53 @@ public class AdminServiceImpl implements AdminService{
     public void updateJdThreeclass(JdThreeclass jdThreeclass) throws Exception {
         jdThreeclassMapper.updateByPrimaryKeySelective(jdThreeclass);
     }
+
+    @Override
+    public void saveJdclass(String[] mClass,String[] tClass,String[] thClass) throws Exception {
+        if(mClass!=null&&tClass!=null&&thClass!=null){
+        for(int i=0;i<mClass.length;i++){
+            JdMclass jdMclass = new JdMclass();
+            if(jdMclassMapper.selectJdMclass_name(mClass[i])<1){
+                jdMclass.setName(mClass[i]);
+                jdMclassMapper.insert(jdMclass);
+            }
+        }
+        for(int i=0;i<tClass.length;i++){
+            System.out.println("第二个"+tClass[i]);
+            String[] tClassName = tClass[i].split("/");
+            System.out.println(tClassName[0]+"====================="+tClassName[1]);
+            JdTwoclass jdTwoclass = new JdTwoclass();
+            String mid = jdMclassMapper.selectJdMclass_name2(tClassName[1]);
+            if(mid==null){
+                throw new JdException("输入有误！！！");
+            }
+            if(jdTwoclassMapper.selectJdTwoclass_name2(tClassName[0],Integer.parseInt(mid))<1){
+                jdTwoclass.setMid(Integer.parseInt(mid));
+                jdTwoclass.setName(tClassName[0]);
+                jdTwoclassMapper.insert(jdTwoclass);
+            }
+        }
+        for(int i=0;i<thClass.length;i++){
+            System.out.println("第三个"+thClass[i]);
+            String[] thClassName = thClass[i].split("/");
+            JdThreeclass jdThreeclass = new JdThreeclass();
+            String mid = jdMclassMapper.selectJdMclass_name2(thClassName[2]);
+            if(mid==null){
+                throw new JdException("输入有误！！！");
+            }
+            String tid = jdTwoclassMapper.selectJdTwoclass_name3(thClassName[1],Integer.parseInt(mid));
+            if(tid==null){
+                throw new JdException("输入有误！！！");
+            }
+            if(jdThreeclassMapper.selectJdThclass_name(thClassName[0],Integer.parseInt(tid))<1){
+                System.out.println(tid+"=============="+thClassName[0]);
+                jdThreeclass.setName(thClassName[0]);
+                jdThreeclass.setTid(Integer.parseInt(tid));
+                jdThreeclassMapper.insert(jdThreeclass);
+            }
+            }
+        }else{
+            throw new JdException("输入有误！！！");
+        }
+    }
 }

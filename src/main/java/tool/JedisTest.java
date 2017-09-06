@@ -42,7 +42,8 @@ public class JedisTest {
     public void testJedisClientSpring() throws Exception{
         //创建一个spring容器
         ApplicationContext applicationContext =
-                new ClassPathXmlApplicationContext("classpath:spring/applicationContext-service.xml");
+                new ClassPathXmlApplicationContext
+                        ("classpath:spring/applicationContext-service.xml");
         //从容器中获取JedisClient对象
         JedisClient jedisClient = applicationContext.getBean(JedisClienSingle.class);
         jedisClient.set("cliet1","100");
