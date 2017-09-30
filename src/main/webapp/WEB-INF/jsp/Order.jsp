@@ -205,7 +205,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </c:forEach>
         </c:if>
         <div class="col-md-4 cart-total">
-            <a class="continue" href="#">退出订单，继续购物</a>
+            <a class="continue" href="/Jd/select">退出订单，继续购物</a>
             <div class="subscribe">
                 <h4>收件人信息：</h4>
                 <input type="text" placeholder="地址" name="address"required="" />

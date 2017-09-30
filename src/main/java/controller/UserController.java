@@ -1,12 +1,6 @@
 package controller;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +10,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import po.*;
 import service.JedisClient.JedisClient;
+import service.ProdService;
 import service.ProdsService;
 import service.UserService;
-import tool.EmailCheck;
-import tool.Forget;
-import tool.PhoneCheck;
-import tool.actiCode;
+import tool.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +29,8 @@ import static org.nutz.el.El.eval;
 @Controller
 public class UserController {
     @Autowired
+    private ProdService prodService;
+    @Autowired
     private JedisClient jedisClient;
     @Autowired
     private ProdsService prodsService;
@@ -45,12 +39,35 @@ public class UserController {
     @RequestMapping("/message")
     public String message(int uid,Model model)throws Exception{
         //分类
-        List<JdMclass> s1 = userService.selectJdMclass();
-        List<JdTwoclass> s2 = userService.selectJdTwoclass();
-        List<JdThreeclass> s3 = userService.selectJdThreeclass();
-        model.addAttribute("JdMclass", s1);
-        model.addAttribute("JdTwoclass", s2);
-        model.addAttribute("JdThreeclass", s3);
+        if(jedisClient.get("key")!=null){
+            System.out.println("--------------redis");
+            Map<String, Object> map = JsonUtil.json2Map(jedisClient.get("key"));
+            List<JdMclass> s1 = (List<JdMclass>) map.get("JdMclass");
+            List<JdTwoclass> s2 = (List<JdTwoclass>) map.get("JdTwoclass");
+            List<JdThreeclass> s3 = (List<JdThreeclass>) map.get("JdThreeclass");
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+        }else{
+            List<JdMclass> s1 = userService.selectJdMclass();
+            List<JdTwoclass> s2 = userService.selectJdTwoclass();
+            List<JdThreeclass> s3 = userService.selectJdThreeclass();
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+            Map<String, Object> map = new HashMap<String, Object>();
+            if(s1!=null){
+                map.put("JdMclass",s1);
+            }
+            if(s2!=null){
+                map.put("JdTwoclass",s2);
+            }
+            if(s3!=null){
+                map.put("JdThreeclass",s3);
+            }
+            JSONObject json = JSONObject.fromObject(map);
+            jedisClient.set("key",json.toString());
+        }
 
         List<JdOrder> s4 = userService.selectJdOrderUser(uid);
         List<JdSizes> s5 = new ArrayList<>();
@@ -70,19 +87,42 @@ public class UserController {
     }
     @RequestMapping("/messageUI")
     public String messageUI(int mid,int uid,int stoid,String message,Model model)throws Exception{
-        List<JdMclass> s4 = userService.selectJdMclass();
-        List<JdTwoclass> s5 = userService.selectJdTwoclass();
-        List<JdThreeclass> s6 = userService.selectJdThreeclass();
-        model.addAttribute("JdMclass", s4);
-        model.addAttribute("JdTwoclass", s5);
-        model.addAttribute("JdThreeclass", s6);
+        if(jedisClient.get("key")!=null){
+            System.out.println("--------------redis");
+            Map<String, Object> map = JsonUtil.json2Map(jedisClient.get("key"));
+            List<JdMclass> s1 = (List<JdMclass>) map.get("JdMclass");
+            List<JdTwoclass> s2 = (List<JdTwoclass>) map.get("JdTwoclass");
+            List<JdThreeclass> s3 = (List<JdThreeclass>) map.get("JdThreeclass");
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+        }else{
+            List<JdMclass> s1 = userService.selectJdMclass();
+            List<JdTwoclass> s2 = userService.selectJdTwoclass();
+            List<JdThreeclass> s3 = userService.selectJdThreeclass();
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+            Map<String, Object> map = new HashMap<String, Object>();
+            if(s1!=null){
+                map.put("JdMclass",s1);
+            }
+            if(s2!=null){
+                map.put("JdTwoclass",s2);
+            }
+            if(s3!=null){
+                map.put("JdThreeclass",s3);
+            }
+            JSONObject json = JSONObject.fromObject(map);
+            jedisClient.set("key",json.toString());
+        }
         if(mid==0){
-        JdMessage s1 = new JdMessage();
-        s1.setMessage(message);
-        s1.setUid(uid);
-        s1.setStoid(stoid);
-        s1.setState("0");
-        userService.insertMessage(s1);
+            JdMessage s1 = new JdMessage();
+            s1.setMessage(message);
+            s1.setUid(uid);
+            s1.setStoid(stoid);
+            s1.setState("0");
+            userService.insertMessage(s1);
         }else{
             JdMessage s2 = new JdMessage();
             s2.setMid(mid);
@@ -148,20 +188,44 @@ public class UserController {
             s3.setProid(proid[i]);
             userService.intsertJdOrderProds(s3);
         }
-        return "/prod";
+        return "redirect:prod";
     }
     @RequestMapping("/Order")
     public String Order(String zprice,String[] num,String[] pimgid,String[] sizeid,String[] proid,Model model) throws Exception {
         //分类
-        List<JdMclass> s1 = userService.selectJdMclass();
-        List<JdTwoclass> s2 = userService.selectJdTwoclass();
-        List<JdThreeclass> s3 = userService.selectJdThreeclass();
-        model.addAttribute("JdMclass", s1);
-        model.addAttribute("JdTwoclass", s2);
-        model.addAttribute("JdThreeclass", s3);
+        if(jedisClient.get("key")!=null){
+            System.out.println("--------------redis");
+            Map<String, Object> map = JsonUtil.json2Map(jedisClient.get("key"));
+            List<JdMclass> s1 = (List<JdMclass>) map.get("JdMclass");
+            List<JdTwoclass> s2 = (List<JdTwoclass>) map.get("JdTwoclass");
+            List<JdThreeclass> s3 = (List<JdThreeclass>) map.get("JdThreeclass");
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+        }else{
+            List<JdMclass> s1 = userService.selectJdMclass();
+            List<JdTwoclass> s2 = userService.selectJdTwoclass();
+            List<JdThreeclass> s3 = userService.selectJdThreeclass();
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+            Map<String, Object> map = new HashMap<String, Object>();
+            if(s1!=null){
+                map.put("JdMclass",s1);
+            }
+            if(s2!=null){
+                map.put("JdTwoclass",s2);
+            }
+            if(s3!=null){
+                map.put("JdThreeclass",s3);
+            }
+            JSONObject json = JSONObject.fromObject(map);
+            jedisClient.set("key",json.toString());
+        }
         List<JdProds> JdProds = new ArrayList<>();
         List<JdSizes> JdSizes = new ArrayList<>();
         List<JdProdimg> JdProdimg = new ArrayList<>();
+        System.out.println("-----------------------------"+proid.length);
         for(int i=0;i<proid.length;i++){
             JdProds.add(userService.selectOJdProds(proid[i]));
             JdSizes.add(userService.selectOJdSizes(sizeid[i]));
@@ -207,231 +271,81 @@ public class UserController {
         userService.updateUser(jdUser);
         return "login";
     }
-    @RequestMapping("/select_page")
-    public void select_page(HttpServletResponse response,String pagenum,String tid,String mid,String thid) throws Exception {
-        if(mid.equals("0")&&thid.equals("0")&&mid.equals("0")) {
-            Map<String, Object> map = new HashMap<String, Object>();
-                PageHelper.startPage(Integer.parseInt(pagenum), 6);
-                List<JdProds> s4 = userService.selectJdProds();
-                PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(s4);
-                int total = (int) ((pageInfo.getTotal()-1)/6)+1;
-                map.put("prods",s4);
-            List<JdProdimg> s5 = new ArrayList<>();
-            for(int i=0;i<s4.size();i++){
-                s5.addAll(userService.selectJdProdimg(s4.get(i).getProid()+""));
-            }
-                map.put("Img",s5);
-                map.put("total",total);
-                map.put("pagenum",pagenum);
-            JSONObject json = JSONObject.fromObject(map);
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().print(json.toString());
-        }else if (!thid.equals("0")){
-            Map<String, Object> map = new HashMap<String, Object>();
-            PageHelper.startPage(Integer.parseInt(pagenum), 6);
-            List<JdProds> s4 = userService.selectJdProds_thid(thid);
-            PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(s4);
-            int total = (int) ((pageInfo.getTotal()-1)/6)+1;
-            map.put("prods",s4);
-            if(s4!=null){
-                List<JdProdimg> s5 = new ArrayList<>();
-                for(int i=0;i<s4.size();i++){
-                    s5.addAll(userService.selectJdProdimg(s4.get(i).getProid()+""));
-                }
-                map.put("Img",s5);
-            }
-            map.put("total",total);
-            map.put("page",pagenum);
-            JSONObject json = JSONObject.fromObject(map);
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().print(json.toString());
-        } else if (!mid.equals("0")){
-            Map<String, Object> map = new HashMap<String, Object>();
-            List<JdTwoclass> val = userService.selectJdTwoclass(mid);
-            List<JdThreeclass> val2 = new ArrayList<>();
-            PageHelper.startPage(Integer.parseInt(pagenum), 6);
-            List<JdProds> val3 = new ArrayList<>();
-            for(int j=0;j<val.size();j++){
-                if(userService.selectJdThreeclass(""+val.get(j).getTid())!=null){
-                    val2.addAll(userService.selectJdThreeclass(""+val.get(j).getTid()));
-                }
-            }
-            for(int z=0;z<val2.size();z++){
-                if(userService.selectJdProds_thid("" + val2.get(z).getThid())!=null) {
-                    val3.addAll(userService.selectJdProds_thid("" + val2.get(z).getThid()));
-                }
-            }
-                PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(val3);
-                int total = (int) ((pageInfo.getTotal()-1)/6)+1;
-                map.put("prods",val3);
-            if(val3!=null){
-                List<JdProdimg> s5 = new ArrayList<>();
-                for(int i=0;i<val3.size();i++){
-                    s5.addAll(userService.selectJdProdimg(val3.get(i).getProid()+""));
-                }
-                map.put("Img",s5);
-                JSONObject json = JSONObject.fromObject(map);
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().print(json.toString());
-            }
-        }else{
-            Map<String, Object> map = new HashMap<String, Object>();
-            List<JdThreeclass> val2 = userService.selectJdThreeclass(tid);
-            PageHelper.startPage(Integer.parseInt(pagenum), 6);
-            List<JdProds> val3 = new ArrayList<>();
-            for(int z=0;z<val2.size();z++){
-                if(userService.selectJdProds_thid("" + val2.get(z).getThid())!=null) {
-                    val3.addAll(userService.selectJdProds_thid("" + val2.get(z).getThid()));
-                }
-            }
-            if(val3!=null){
-                List<JdProdimg> s5 = new ArrayList<>();
-                for(int i=0;i<val3.size();i++){
-                    s5.addAll(userService.selectJdProdimg(val3.get(i).getProid()+""));
-                }
-                map.put("Img",s5);
-            }
-            PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(val3);
-            int total = (int) ((pageInfo.getTotal()-1)/6)+1;
-            map.put("prods",val3);
-            JSONObject json = JSONObject.fromObject(map);
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().print(json.toString());
-        }
-    }
-    @RequestMapping("/select2")
-    public String select2(String brand,Model model) throws Exception {
-        List<JdMclass> s1 = userService.selectJdMclass();
-        List<JdTwoclass> s2 = userService.selectJdTwoclass();
-        List<JdThreeclass> s3 = userService.selectJdThreeclass();
-        model.addAttribute("JdMclass", s1);
-        model.addAttribute("JdTwoclass", s2);
-        model.addAttribute("JdThreeclass", s3);
-        if(brand.equals("1")){
-            brand = "Nike";
-        }else if(brand.equals("2")){
-            brand = "阿迪达斯";
-        }else{
-            brand = "特步";
-        }
-        PageHelper.startPage(1, 6);
-        List<JdProds> prods = userService.selectJdProd2(brand);
-        PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(prods);
-        int total = (int) ((pageInfo.getTotal()-1)/6)+1;
-        //款式图
-        List<JdProdimg> s5 = new ArrayList<>();
-        for(int i=0;i<prods.size();i++){
-            s5.addAll(userService.selectJdProdimg(prods.get(i).getProid()+""));
-        }
-        model.addAttribute("Img",s5);
-        model.addAttribute("prods",prods);
-        model.addAttribute("total",total);
-        model.addAttribute("page","1");
-        return "select";
-    }
     @RequestMapping("/select")
-    public String select(String tid,String mid,String thid,Model model) throws Exception {
-            //分类
+    public String select(String queryString,String mid,String tid,String thid,
+                          String sort,String brand,Integer page,Model model) throws Exception {
+        System.out.println("============================="+queryString);
+        if(jedisClient.get("key")!=null){
+            Map<String, Object> map = JsonUtil.json2Map(jedisClient.get("key"));
+            List<JdMclass> s1 = (List<JdMclass>) map.get("JdMclass");
+            List<JdTwoclass> s2 = (List<JdTwoclass>) map.get("JdTwoclass");
+            List<JdThreeclass> s3 = (List<JdThreeclass>) map.get("JdThreeclass");
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+        }else{
             List<JdMclass> s1 = userService.selectJdMclass();
             List<JdTwoclass> s2 = userService.selectJdTwoclass();
             List<JdThreeclass> s3 = userService.selectJdThreeclass();
-            model.addAttribute("JdMclass", s1);
-            model.addAttribute("JdTwoclass", s2);
-            model.addAttribute("JdThreeclass", s3);
-            //判断选择了什么
-        if(mid==null&&thid==null&&tid==null) {
-                PageHelper.startPage(1, 6);
-                List<JdProds> prods = userService.selectJdProds();
-                PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(prods);
-                int total = (int) ((pageInfo.getTotal()-1)/6)+1;
-                //款式图
-                List<JdProdimg> s5 = new ArrayList<>();
-                for(int i=0;i<prods.size();i++){
-                    s5.addAll(userService.selectJdProdimg(prods.get(i).getProid()+""));
-                }
-            model.addAttribute("Img",s5);
-            model.addAttribute("prods",prods);
-            model.addAttribute("total",total);
-            model.addAttribute("page","1");
-            System.out.println("------------------------"+1);
-        }else if (thid!=null){
-            PageHelper.startPage(1, 6);
-            List<JdProds> s4 = userService.selectJdProds_thid(thid);
-            PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(s4);
-            int total = (int) ((pageInfo.getTotal()-1)/6)+1;
-            model.addAttribute("prods",s4);
-            if(s4!=null){
-                List<JdProdimg> s5 = new ArrayList<>();
-                for(int i=0;i<s4.size();i++){
-                    s5.addAll(userService.selectJdProdimg(s4.get(i).getProid()+""));
-                }
-                model.addAttribute("Img",s5);
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+            Map<String, Object> map = new HashMap<String, Object>();
+            if(s1!=null){
+                map.put("JdMclass",s1);
             }
-            model.addAttribute("total",total);
-            model.addAttribute("page","1");
-            System.out.println("------------------------"+2);
-        } else if (mid!=null){
-            PageHelper.startPage(1, 6);
-            List<JdTwoclass> val = userService.selectJdTwoclass(mid);
-            List<JdThreeclass> val2 = new ArrayList<>();
-            List<JdProds> val3 = new ArrayList<>();
-            System.out.println("-----------------------------------"+val.size());
-            for(int j=0;j<val.size();j++){
-                if(userService.selectJdThreeclass(""+val.get(j).getTid())!=null){
-                val2.addAll(userService.selectJdThreeclass(""+val.get(j).getTid()));
-                }
+            if(s2!=null){
+                map.put("JdTwoclass",s2);
             }
-            System.out.println("-----------------------------------"+val2.size());
-            for(int z=0;z<val2.size();z++){
-                if(userService.selectJdProds_thid("" + val2.get(z).getThid())!=null) {
-                    val3.addAll(userService.selectJdProds_thid("" + val2.get(z).getThid()));
-                }
+            if(s3!=null){
+                map.put("JdThreeclass",s3);
             }
-            System.out.println("-----------------------------------"+val3.size());
-            PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(val3);
-            int total = (int) ((pageInfo.getTotal()-1)/6)+1;
-            model.addAttribute("prods",val3);
-            if(val3!=null){
-                List<JdProdimg> s5 = new ArrayList<>();
-                for(int i=0;i<val3.size();i++){
-                    s5.addAll(userService.selectJdProdimg(val3.get(i).getProid()+""));
-                }
-                model.addAttribute("Img",s5);
-                model.addAttribute("total",total);
-                model.addAttribute("page","1");
-            }
-        }else{
-            PageHelper.startPage(1, 6);
-            List<JdThreeclass> val2 = userService.selectJdThreeclass(tid);
-            List<JdProds> val3 = new ArrayList<>();
-            for(int z=0;z<val2.size();z++){
-                if(userService.selectJdProds_thid("" + val2.get(z).getThid())!=null) {
-                    val3.addAll(userService.selectJdProds_thid("" + val2.get(z).getThid()));
-                }
-            }
-            if(val3!=null){
-                List<JdProdimg> s5 = new ArrayList<>();
-                for(int i=0;i<val3.size();i++){
-                    s5.addAll(userService.selectJdProdimg(val3.get(i).getProid()+""));
-                }
-                model.addAttribute("Img",s5);
-            }
-            PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(val3);
-            int total = (int) ((pageInfo.getTotal()-1)/6)+1;
-            model.addAttribute("total",total);
-            model.addAttribute("page","1");
-            model.addAttribute("prods",val3);
+            JSONObject json = JSONObject.fromObject(map);
+            jedisClient.set("key",json.toString());
         }
+        ResultModel resultModel = prodService.query(queryString,brand,sort,page,mid,tid,thid);
+        model.addAttribute("result",resultModel);
+        model.addAttribute("queryString",queryString);
+        model.addAttribute("brand",brand);
+        model.addAttribute("sort",sort);
+        model.addAttribute("mid",mid);
+        model.addAttribute("tid",tid);
+        model.addAttribute("thid",thid);
+        model.addAttribute("page", resultModel.getCurPage());
+        model.addAttribute("total",resultModel.getPageCount());
         return "select";
     }
     @RequestMapping("/selectP")
     public String selectP(String proid,String pimgid,Model model) throws Exception {
-        List<JdMclass> s1 = userService.selectJdMclass();
-        List<JdTwoclass> s2 = userService.selectJdTwoclass();
-        List<JdThreeclass> s3 = userService.selectJdThreeclass();
-        model.addAttribute("JdMclass",s1);
-        model.addAttribute("JdTwoclass",s2);
-        model.addAttribute("JdThreeclass",s3);
+        if(jedisClient.get("key")!=null){
+            System.out.println("--------------redis");
+            Map<String, Object> map = JsonUtil.json2Map(jedisClient.get("key"));
+            List<JdMclass> s1 = (List<JdMclass>) map.get("JdMclass");
+            List<JdTwoclass> s2 = (List<JdTwoclass>) map.get("JdTwoclass");
+            List<JdThreeclass> s3 = (List<JdThreeclass>) map.get("JdThreeclass");
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+        }else{
+            List<JdMclass> s1 = userService.selectJdMclass();
+            List<JdTwoclass> s2 = userService.selectJdTwoclass();
+            List<JdThreeclass> s3 = userService.selectJdThreeclass();
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+            Map<String, Object> map = new HashMap<String, Object>();
+            if(s1!=null){
+                map.put("JdMclass",s1);
+            }
+            if(s2!=null){
+                map.put("JdTwoclass",s2);
+            }
+            if(s3!=null){
+                map.put("JdThreeclass",s3);
+            }
+            JSONObject json = JSONObject.fromObject(map);
+            jedisClient.set("key",json.toString());
+        }
 
         List<JdProdimg> jdprodimg = prodsService.selectJdProdimg(proid);
         if(pimgid!=null&&!"".equals(pimgid)) {
@@ -463,12 +377,35 @@ public class UserController {
     }
     @RequestMapping("/cart")
     public String cart(String uid,String cid,Model model) throws Exception {
-        List<JdMclass> s1 = userService.selectJdMclass();
-        List<JdTwoclass> s2 = userService.selectJdTwoclass();
-        List<JdThreeclass> s3 = userService.selectJdThreeclass();
-        model.addAttribute("JdMclass",s1);
-        model.addAttribute("JdTwoclass",s2);
-        model.addAttribute("JdThreeclass",s3);
+        if(jedisClient.get("key")!=null){
+            System.out.println("--------------redis");
+            Map<String, Object> map = JsonUtil.json2Map(jedisClient.get("key"));
+            List<JdMclass> s1 = (List<JdMclass>) map.get("JdMclass");
+            List<JdTwoclass> s2 = (List<JdTwoclass>) map.get("JdTwoclass");
+            List<JdThreeclass> s3 = (List<JdThreeclass>) map.get("JdThreeclass");
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+        }else{
+            List<JdMclass> s1 = userService.selectJdMclass();
+            List<JdTwoclass> s2 = userService.selectJdTwoclass();
+            List<JdThreeclass> s3 = userService.selectJdThreeclass();
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+            Map<String, Object> map = new HashMap<String, Object>();
+            if(s1!=null){
+                map.put("JdMclass",s1);
+            }
+            if(s2!=null){
+                map.put("JdTwoclass",s2);
+            }
+            if(s3!=null){
+                map.put("JdThreeclass",s3);
+            }
+            JSONObject json = JSONObject.fromObject(map);
+            jedisClient.set("key",json.toString());
+        }
         if(cid.equals("0")){
             userService.insertCart(uid);
         }else{
@@ -487,33 +424,42 @@ public class UserController {
                 s6.addAll(userService.selectJdSizes(s5.get(i).getPimgid()+""));
             }
             model.addAttribute("Sizes",s6);
+            System.out.println("-------------------------"+prods);
             System.out.println("-------------------------"+s6.size());
         }
         return "cart";
     }
     @RequestMapping("/prod")
     public String prod(Model model) throws Exception {
-        List<JdMclass> s1 = userService.selectJdMclass();
-        List<JdTwoclass> s2 = userService.selectJdTwoclass();
-        List<JdThreeclass> s3 = userService.selectJdThreeclass();
-        model.addAttribute("JdMclass",s1);
-        model.addAttribute("JdTwoclass",s2);
-        model.addAttribute("JdThreeclass",s3);
-
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        if(s1!=null){
-//            map.put("JdMclass",s1);
-//        }
-//        if(s2!=null){
-//            map.put("JdTwoclass",s2);
-//        }
-//        if(s3!=null){
-//            map.put("JdThreeclass",s3);
-//        }
-//        JSONObject json = JSONObject.fromObject(map);
-//        jedisClient.set("key",json.toString());
-//        String key = jedisClient.get("key");
-//        System.out.println("====================="+key);
+        if(jedisClient.get("key")!=null){
+            System.out.println("--------------redis");
+            Map<String, Object> map = JsonUtil.json2Map(jedisClient.get("key"));
+            List<JdMclass> s1 = (List<JdMclass>) map.get("JdMclass");
+            List<JdTwoclass> s2 = (List<JdTwoclass>) map.get("JdTwoclass");
+            List<JdThreeclass> s3 = (List<JdThreeclass>) map.get("JdThreeclass");
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+        }else{
+            List<JdMclass> s1 = userService.selectJdMclass();
+            List<JdTwoclass> s2 = userService.selectJdTwoclass();
+            List<JdThreeclass> s3 = userService.selectJdThreeclass();
+            model.addAttribute("JdMclass",s1);
+            model.addAttribute("JdTwoclass",s2);
+            model.addAttribute("JdThreeclass",s3);
+            Map<String, Object> map = new HashMap<String, Object>();
+        if(s1!=null){
+            map.put("JdMclass",s1);
+        }
+        if(s2!=null){
+            map.put("JdTwoclass",s2);
+        }
+        if(s3!=null){
+            map.put("JdThreeclass",s3);
+        }
+            JSONObject json = JSONObject.fromObject(map);
+            jedisClient.set("key",json.toString());
+        }
 
         List<JdProds> prods = userService.selectJdProds();
         //款式图
@@ -668,105 +614,6 @@ public class UserController {
         }else{
             userService.updateUser_name(jdUser);
         return "login";
-        }
-    }
-    @RequestMapping("/select_price")
-    public void select_price(HttpServletResponse response,String pagenum,String price,String thid,String tid,String mid)throws Exception{
-        if(mid.equals("0")&&thid.equals("0")&&mid.equals("0")) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            PageHelper.startPage(Integer.parseInt(pagenum), 6);
-            List<JdProds> s4 = userService.selectJdProds_price(price);
-            PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(s4);
-            int total = (int) ((pageInfo.getTotal()-1)/6)+1;
-
-            map.put("prods",s4);
-            List<JdProdimg> s5 = new ArrayList<>();
-            for(int i=0;i<s4.size();i++){
-                s5.addAll(userService.selectJdProdimg(s4.get(i).getProid()+""));
-            }
-            map.put("Img",s5);
-            map.put("total",total);
-            map.put("pagenum",pagenum);
-            JSONObject json = JSONObject.fromObject(map);
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().print(json.toString());
-        }else if (!thid.equals("0")){
-            Map<String, Object> map = new HashMap<String, Object>();
-            PageHelper.startPage(Integer.parseInt(pagenum), 6);
-            List<JdProds> s4 = userService.selectJdProds_thid_price(thid,price);
-            //排序
-            PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(s4);
-            int total = (int) ((pageInfo.getTotal()-1)/6)+1;
-            map.put("prods",s4);
-            if(s4!=null){
-                List<JdProdimg> s5 = new ArrayList<>();
-                for(int i=0;i<s4.size();i++){
-                    s5.addAll(userService.selectJdProdimg(s4.get(i).getProid()+""));
-                }
-                map.put("Img",s5);
-            }
-            map.put("total",total);
-            map.put("page",pagenum);
-            JSONObject json = JSONObject.fromObject(map);
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().print(json.toString());
-        } else if (!mid.equals("0")){
-            Map<String, Object> map = new HashMap<String, Object>();
-            List<JdTwoclass> val = userService.selectJdTwoclass(mid);
-            List<JdThreeclass> val2 = new ArrayList<>();
-            PageHelper.startPage(Integer.parseInt(pagenum), 6);
-            List<JdProds> val3 = new ArrayList<>();
-            for(int j=0;j<val.size();j++){
-                if(userService.selectJdThreeclass(""+val.get(j).getTid())!=null){
-                    val2.addAll(userService.selectJdThreeclass(""+val.get(j).getTid()));
-                }
-            }
-            for(int z=0;z<val2.size();z++){
-                if(userService.selectJdProds_thid_price(thid,price)!=null) {
-                    val3.addAll(userService.selectJdProds_thid_price(thid,price));
-                }
-            }
-            //排序
-            PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(val3);
-            int total = (int) ((pageInfo.getTotal()-1)/6)+1;
-            map.put("prods",val3);
-            if(val3!=null){
-                List<JdProdimg> s5 = new ArrayList<>();
-                for(int i=0;i<val3.size();i++){
-                    s5.addAll(userService.selectJdProdimg(val3.get(i).getProid()+""));
-                }
-                map.put("page",pagenum);
-                map.put("Img",s5);
-                JSONObject json = JSONObject.fromObject(map);
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().print(json.toString());
-            }
-        }else{
-            Map<String, Object> map = new HashMap<String, Object>();
-            List<JdThreeclass> val2 = userService.selectJdThreeclass(tid);
-            PageHelper.startPage(Integer.parseInt(pagenum), 6);
-            //排序
-            List<JdProds> val3 = new ArrayList<>();
-            for(int z=0;z<val2.size();z++){
-                if(userService.selectJdProds_thid("" + val2.get(z).getThid())!=null) {
-                    val3.addAll(userService.selectJdProds_thid("" + val2.get(z).getThid()));
-                }
-            }
-            if(val3!=null){
-                List<JdProdimg> s5 = new ArrayList<>();
-                for(int i=0;i<val3.size();i++){
-                    s5.addAll(userService.selectJdProdimg(val3.get(i).getProid()+""));
-                }
-                map.put("Img",s5);
-            }
-            //排序
-            PageInfo<JdProds> pageInfo = new PageInfo<JdProds>(val3);
-            int total = (int) ((pageInfo.getTotal()-1)/6)+1;
-            map.put("page",pagenum);
-            map.put("prods",val3);
-            JSONObject json = JSONObject.fromObject(map);
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().print(json.toString());
         }
     }
     @RequestMapping("/addcart")

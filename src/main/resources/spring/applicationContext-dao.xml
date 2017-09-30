@@ -51,5 +51,8 @@
 		<property name="basePackage" value="mapper"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
-
+	<bean id="solrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
+		<constructor-arg index="0" value="http://localhost:8080/solr"/>
+	</bean>
+	<context:component-scan base-package="dao"></context:component-scan>
 </beans>

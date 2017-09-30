@@ -90,6 +90,19 @@
       <root url="jar://H:/项目所需jar包/JSONObject/commons-logging-1.1.jar!/" />
       <root url="jar://H:/项目所需jar包/JSONObject/ezmorph-1.0.6.jar!/" />
       <root url="jar://H:/项目所需jar包/JSONObject/json-lib-2.3-jdk15.jar!/" />
+      <root url="jar://H:/项目所需jar包/solr要用到的jar包/commons-io-2.3.jar!/" />
+      <root url="jar://H:/项目所需jar包/solr要用到的jar包/httpclient-4.3.1.jar!/" />
+      <root url="jar://H:/项目所需jar包/solr要用到的jar包/httpcore-4.3.jar!/" />
+      <root url="jar://H:/项目所需jar包/solr要用到的jar包/httpmime-4.3.1.jar!/" />
+      <root url="jar://H:/项目所需jar包/solr要用到的jar包/jcl-over-slf4j-1.7.6.jar!/" />
+      <root url="jar://H:/项目所需jar包/solr要用到的jar包/jul-to-slf4j-1.7.6.jar!/" />
+      <root url="jar://H:/项目所需jar包/solr要用到的jar包/log4j-1.2.17.jar!/" />
+      <root url="jar://H:/项目所需jar包/solr要用到的jar包/noggit-0.5.jar!/" />
+      <root url="jar://H:/项目所需jar包/solr要用到的jar包/slf4j-api-1.7.6.jar!/" />
+      <root url="jar://H:/项目所需jar包/solr要用到的jar包/slf4j-log4j12-1.7.6.jar!/" />
+      <root url="jar://H:/项目所需jar包/solr要用到的jar包/solr-solrj-4.10.3.jar!/" />
+      <root url="jar://H:/项目所需jar包/solr要用到的jar包/wstx-asl-3.2.7.jar!/" />
+      <root url="jar://H:/项目所需jar包/solr要用到的jar包/zookeeper-3.4.6.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

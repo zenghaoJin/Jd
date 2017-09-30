@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 
+import dao.ProdDao;
 import javafx.scene.control.Cell;
 import net.sf.json.JSONObject;
 
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import po.*;
+import service.ProdService;
 import service.ProdsService;
 
 import javax.servlet.http.Cookie;
@@ -42,6 +44,8 @@ import org.apache.poi.ss.usermodel.Row;
 public class ProdsController {
     @Autowired
     private ProdsService prodsService;
+    @Autowired
+    private ProdService prodService;
     @RequestMapping("/s_message")
     public String s_message(int stoid,Model model)throws Exception{
         List<JdMessage> s1 = prodsService.selectMessage(stoid);
@@ -612,16 +616,7 @@ public class ProdsController {
         return "text";
     }
     @RequestMapping("/text2")
-    public void test2()throws Exception{
-
+    public String test2()throws Exception{
+        return "text";
     }
-//    @RequestMapping("/s_selectImg")
-//    public void s_selectImg(HttpServletResponse response,String stoid,Model model) throws Exception {
-//        List<JdProdimg> jdprodimg = prodsService.selectJdProdimg(stoid);
-//        ObjectMapper mapper = new ObjectMapper();
-//        String result = mapper.writeValueAsString(jdprodimg);
-//        System.out.println(result);
-//        response.setCharacterEncoding("UTF-8");
-//        response.getWriter().print(result);
-//    }
 }

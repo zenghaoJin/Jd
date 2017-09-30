@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import po.*;
 import service.AdminService;
+import service.JedisClient.JedisClient;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +36,8 @@ import java.util.Map;
 public class AdminController {
     @Autowired
     private AdminService adminService;
-
+    @Autowired
+    private JedisClient jedisClient;
     @RequestMapping("/push-pseries")
     public String push_pseries() throws Exception {
         return "push-pseries";
@@ -117,6 +119,9 @@ public class AdminController {
             result = "{\"name\":\"0\"}";
         }else{
             adminService.addJdMclass(jdMclass);
+            if(jedisClient.get("key")!=null){
+                jedisClient.decr("key");
+            }
             result = "{\"name\":\""+jdMclass.getName()+"\",\"mid\":\""+jdMclass.getMid()+"\"}";
         }
         response.setCharacterEncoding("UTF-8");
@@ -138,6 +143,9 @@ public class AdminController {
         }else{
             result = "{\"name\":\"1\"}";
             adminService.addJdTwoclass(jdTwoclass);
+            if(jedisClient.get("key")!=null){
+                jedisClient.decr("key");
+            }
         }
         response.setCharacterEncoding("UTF-8");
         response.getWriter().print(result);
@@ -171,6 +179,9 @@ public class AdminController {
         }else{
             result = "{\"name\":\"1\"}";
             adminService.addJdThreeclass(jdThreeclass);
+            if(jedisClient.get("key")!=null){
+                jedisClient.decr("key");
+            }
         }
         response.setCharacterEncoding("UTF-8");
         response.getWriter().print(result);
@@ -258,6 +269,9 @@ public class AdminController {
                 result = "{\"name\":\""+str2+"\",\"mid\":\""+jdMclass.getMid()+"\"}";
                 jdMclass.setName(str2);
                 adminService.updateJdMclass(jdMclass);
+                if(jedisClient.get("key")!=null){
+                    jedisClient.decr("key");
+                }
             }
         }else{
                 result = "{\"mid\":\""+jdMclass.getMid()+"\"}";
@@ -280,6 +294,9 @@ public class AdminController {
             }else{
                 result = "{\"name\":\""+str2+"\",\"tid\":\""+jdTwoclass.getTid()+"\"}";
                 adminService.updateJdTwoclass(jdTwoclass);
+                if(jedisClient.get("key")!=null){
+                    jedisClient.decr("key");
+                }
             }
         }else{
             result = "{\"tid\":\""+jdTwoclass.getTid()+"\"}";
@@ -301,6 +318,9 @@ public class AdminController {
             }else{
                 result = "{\"name\":\""+str2+"\",\"thid\":\""+jdThreeclass.getThid()+"\"}";
                 adminService.updateJdThreeclass(jdThreeclass);
+                if(jedisClient.get("key")!=null){
+                    jedisClient.decr("key");
+                }
             }
         }else{
             result = "{\"thid\":\""+jdThreeclass.getThid()+"\"}";

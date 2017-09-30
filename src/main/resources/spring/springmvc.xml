@@ -18,7 +18,6 @@
 	这里让扫描controller，指定controller的包
 	 -->
 	<context:component-scan base-package="controller"></context:component-scan>
-	
 	<!-- 静态资源解析
 	包括 ：js、css、img、..
 	 -->
@@ -73,6 +72,8 @@
 			<value>52428800</value>
 		</property>
 	</bean>
+
+
 
 
 </beans>

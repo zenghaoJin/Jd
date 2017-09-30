@@ -1,5 +1,9 @@
 package tool;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import po.JdMclass;
+import po.JdThreeclass;
+import po.JdTwoclass;
 import service.JedisClient.JedisClient;
 import service.JedisClient.impl.JedisClienSingle;
 import org.junit.Test;
@@ -7,6 +11,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 曾浩津 on 2017/8/23.
@@ -31,8 +38,11 @@ public class JedisTest {
         //从连接池中获得一个连接
         Jedis jedis = jedisPool.getResource();
         jedis.auth("123456");
-        String test = jedis.get("test");
-        System.out.println(test);
+        jedis.del("key");
+//        Map<String, Object> map = JsonUtil.json2Map(test);
+//        List<JdMclass> s1 = (List<JdMclass>) map.get("JdMclass");
+//        List<JdTwoclass> s2 = (List<JdTwoclass>) map.get("JdTwoclass");
+//        List<JdThreeclass> s3 = (List<JdThreeclass>) map.get("JdThreeclass");
         //jedis必须关闭
         jedis.close();
         //系统关闭时关闭连接池

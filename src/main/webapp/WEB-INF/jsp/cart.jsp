@@ -32,30 +32,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             var money = $(":input[name='money']").val()
             var zprice = $(":input[name='zprice']").val()
             <%--alert(${zprice})--%>
-            var length = ${JdMclass.size()};
+            var length = $(":input[name='num']").size();
 //            alert(length)
 //            alert($("#head0").find(":input[name='pimgid']").val()==null)
-            for(var i=0;i<length;i++){
-//                alert($("#head"+i).find(":input[name='pimgid']").val())
+            $("#message").hide();
+            $(":input[name='num']").each(function(){
+                if($(this).parent().parent().parent().find(":input[name='pimgid']").val()==null){
+                    $("#message").show();
+                    $("#message input").show();
+                    $("#message img").attr('src', 'images/sign_up2.png');
+                    $("#message input").val("商品的购买信息未选").css("color", "#FF0000");
 
-                if($("#head"+i).find(":input[name='pimgid']").val()==null){
+                }
+                if($(this).parent().parent().parent().find(":input[name='sizeid']").val()==null){
                     $("#message").show();
                     $("#message input").show();
                     $("#message img").attr('src', 'images/sign_up2.png');
-                    $("#message input").val("商品"+(i+1)+"的购买信息未选").css("color", "#FF0000");
-                    return false;
+                    $("#message input").val("商品的购买信息未选").css("color", "#FF0000");
                 }
-                if($("#head"+i).find(":input[name='sizeid']").val()==null){
-                    $("#message").show();
-                    $("#message input").show();
-                    $("#message img").attr('src', 'images/sign_up2.png');
-                    $("#message input").val("商品"+(i+1)+"的购买信息未选").css("color", "#FF0000");
-                    return false;
-                }
-                if(Number(money)<Number(zprice)){
-                    $("#message2").show();
-                    return false;
-                }
+            })
+            if(!$("#message").is(":hidden")){
+                return false;
+            }
+            if(Number(money)<Number(zprice)){
+                $("#message2").show();
+                return false;
             }
         }
         function price(num,price,x){
@@ -65,7 +66,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             if(str.test(num)) {
                 $("#message").hide();
                 $("#message input").hide();
-
 //                alert("数量:"+num)//数量
 //                alert("价格:"+price.text().substring(1, price.text().length))//价格
 //                alert(val=="优惠：此商品没有折扣")
@@ -84,19 +84,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         $(x).prev().val(num)
                     }
                 }else{
-                    val = val.substring(3,val.length-3)
-//                    alert("折扣:"+val)
+                    val = val.substring(3,val.length-1)
                     if(num>oldnum){
-                        var val2 = (num-oldnum)*price.text().substring(1, price.text().length)*val
-                        var val3 = (num-oldnum)*val
+                        var val2 = (num-oldnum)*Number(price.text().substring(1, price.text().length))
+                        var val3 = (num-oldnum)*Number(price.text().substring(1, price.text().length))*(val/10)
                         $("#price").html(Number($("#price").html())+val2)
                         $("#price2").html(Number($("#price2").html())+val3)
                         $("#price3").html(Number($("#price").html())-Number($("#price2").html()))
                         $(":input[name='zprice']").val($("#price3").html())
                         $(x).prev().val(num)
                     }else{
-                        var val2 = (oldnum-num)*price.text().substring(1, price.text().length)*val
-                        var val3 = (oldnum-num)*val
+                        var val2 = (oldnum-num)*price.text().substring(1, price.text().length)
+                        var val3 = (oldnum-num)*price.text().substring(1, price.text().length)*(val/10)
                         $("#price").html(Number($("#price").html())-val2)
                         $("#price2").html(Number($("#price2").html())-val3)
                         $("#price3").html(Number($("#price").html())-Number($("#price2").html()))
@@ -230,7 +229,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="cart">
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="men.html">首页</a></li>
+            <li><a href="/Jd/prod">首页</a></li>
             <li class="active">购物车</li>
         </ol>
         <!-- 		 <div class="cart-top">
@@ -263,8 +262,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 $("#price3").html(Number($("#price").html())-Number($("#price2").html()))
                                 $(":input[name='zprice']").val($("#price3").html())
                         }else{
-                            var val = price * num;
-                            var val2 = discount.substring(3,val.length-3)* num
+                            var val = Number(price) * Number(num);
+                            var val2 = Number(discount.substring(3,discount.length-1))/10 * Number(num) * Number(price);
                                 $("#price").html(Number($("#price").html())-val)
                                 $("#price2").html(Number($("#price2").html())-val2)
                                 $("#price3").html(Number($("#price").html())-Number($("#price2").html()))
@@ -296,11 +295,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 //                });
             });
             </script>
-            <c:if test="${prods!=null}">
+            <c:if test="${prods.size()!=0&&prods!=null}">
                 <c:forEach var="i" begin="0" end="${prods.size()-1}" step="1">
-                <input type="hidden" name="proid" value="${prods[i].proid}">
             <div class="cart-header" id="head${i}">
                 <!--按钮-->
+                <input type="hidden" name="proid" value="${prods[i].proid}">
                 <div class="close1" id="close${i}" name="${prods[i].proid}"> </div>
                 <div class="cart-sec">
                     <div class="cart-item cyc">
@@ -359,12 +358,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
         <div class="col-md-3 cart-total">
-            <a class="continue" href="#">继续购物</a>
+            <a class="continue" href="/Jd/select">继续购物</a>
+        <c:if test="${prods.size()!=0&&prods!=null}">
             <div class="price-details">
                 <h2>账单</h2>
                 <span>原价：</span>
                 <span class="total" id="price">
-        <c:if test="${prods!=null}">
             <c:set var="price" value="0"></c:set>
             <c:forEach var="i" begin="0" end="${prods.size()-1}" step="1">
                 <c:set var="price" value="${price+prods[i].price}"></c:set>
@@ -373,9 +372,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </c:if>
                 </span>
                 </span>
+        <c:if test="${prods.size()!=0&&prods!=null}">
                 <span>减免：</span>
                 <span class="total" id="price2">
-        <c:if test="${prods!=null}">
             <c:set var="zprice" value="0"></c:set>
             <c:forEach var="i" begin="0" end="${prods.size()-1}" step="1">
                     <c:set var="zprice" value="${zprice+prods[i].discount/100*prods[i].price}"></c:set>
@@ -386,7 +385,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <c:if test="${zprice!=price}">
                 <c:out value="${price-zprice}"></c:out>
                 </c:if>
-        </c:if>
+
                 </span>
                 <div class="clearfix"></div>
             </div>
@@ -407,6 +406,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <h4>请及时充值</h4>
                 <a class="cpns" href="/Jd/money">充值</a>
             </div>
+            </c:if>
             </form>
         </div>
     </div>
